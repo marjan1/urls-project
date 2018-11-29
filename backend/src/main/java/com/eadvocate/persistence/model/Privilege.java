@@ -1,17 +1,16 @@
 package com.eadvocate.persistence.model;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.Collection;
 
+@Entity
 public class Privilege {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(length = 100)
     private String name;
 
     @ManyToMany(mappedBy = "privileges")
