@@ -1,6 +1,5 @@
 package com.eadvocate;
 
-import de.codecentric.boot.admin.server.config.EnableAdminServer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,7 +15,6 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 import java.lang.reflect.Method;
 
 @SpringBootApplication
-@EnableAdminServer
 public class ELawyerApplication {
 
     @Value("${rest.api.base.path}")
