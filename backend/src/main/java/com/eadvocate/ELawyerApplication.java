@@ -14,7 +14,7 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 
 import java.lang.reflect.Method;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.eadvocate"})
 public class ELawyerApplication {
 
     @Value("${rest.api.base.path}")

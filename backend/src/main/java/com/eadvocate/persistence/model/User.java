@@ -111,7 +111,7 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", roles=" + roles +
+             //   ", roles=" + roles +
                 '}';
     }
 }
