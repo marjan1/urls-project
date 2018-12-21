@@ -1,12 +1,9 @@
 package com.eadvocate.persistence.dao;
 
-import com.eadvocate.persistence.model.User;
+import com.eadvocate.persistence.model.Privilege;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PrivilegeRepository extends JpaRepository<User, Long> {
-    User findByEmail(String email);
+public interface PrivilegeRepository extends JpaRepository<Privilege, Long> {
 
-    @Override
-    void delete(User user);
 
 }

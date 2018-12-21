@@ -1,9 +1,16 @@
 package com.eadvocate.persistence.model;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.Set;
 
 @Entity
+@Data
+@ToString(exclude = {"roles"})
+@EqualsAndHashCode(exclude = {"roles"})
 public class Privilege {
 
     @Id
@@ -13,8 +20,8 @@ public class Privilege {
     @Column(length = 100)
     private String name;
 
-    @ManyToMany(mappedBy = "privileges")
-    private Collection<Role> roles;
+    @ManyToMany(mappedBy = "privileges", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Role> roles;
 
     public Privilege() {
         super();
@@ -25,37 +32,5 @@ public class Privilege {
         this.name = name;
     }
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
-        return result;
-    }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Privilege other = (Privilege) obj;
-        if (name == null) {
-            if (other.name != null)
-                return false;
-        } else if (!name.equals(other.name))
-            return false;
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Privilege{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", roles=" + roles +
-                '}';
-    }
 }

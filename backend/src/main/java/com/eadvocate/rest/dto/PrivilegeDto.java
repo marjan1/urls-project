@@ -1,22 +1,24 @@
 package com.eadvocate.rest.dto;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class LoginUser {
+public class PrivilegeDto {
 
-    private String email;
+    private Long id;
 
-    @Size(min = 5, max = 60)
-    private String password;
+    @Size(max = 100)
+    private String name;
 
-
+    private Set<RoleDto> roleDtos;
 }

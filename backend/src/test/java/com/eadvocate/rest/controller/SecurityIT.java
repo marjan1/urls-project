@@ -1,6 +1,10 @@
 package com.eadvocate.rest.controller;
 
+import com.eadvocate.persistence.dao.RoleRepository;
 import com.eadvocate.rest.dto.LoginUser;
+import com.eadvocate.rest.dto.RoleDto;
+import com.eadvocate.rest.dto.UserDto;
+import com.eadvocate.util.ConversionUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,6 +21,7 @@ import org.springframework.web.context.WebApplicationContext;
 import java.nio.charset.Charset;
 
 import static com.eadvocate.util.Constants.AUTHORIZATION_HEADER;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -33,6 +38,15 @@ public class SecurityIT {
     @Autowired
     private WebApplicationContext context;
 
+    @Autowired
+    private RoleRepository roleRepository;
+
+    @Autowired
+    private ConversionUtil conversionUtil;
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
     private MockMvc mvc;
 
     @Before
@@ -43,6 +57,179 @@ public class SecurityIT {
                 .build();
     }
 
+    @Test
+    public void shouldAddNewUserLoginAndGetUsersWithSameRole() throws Exception {
+
+        RoleDto portalAdminRole = conversionUtil.convertToDto(
+                roleRepository.getByName("ROLE_PORTAL_ADMINISTRATOR"));
+
+        UserDto userDto = UserDto.builder()
+                .firstName("name1")
+                .lastName("surname1")
+                .email("m1@company1.com")
+                .password("passMarjan1!")
+                .matchingPassword("passMarjan1!")
+                .roleDto(portalAdminRole)
+                .build();
+
+        MvcResult result = mvc.perform(post("/api/signup").contentType(APPLICATION_JSON_UTF8)
+                .content(objectMapper.writeValueAsString(userDto)))
+                .andExpect(status().isOk()).andReturn();
+
+        LoginUser loginUser = LoginUser.builder().email(userDto.getEmail()).password(userDto.getPassword()).build();
+
+        MvcResult loginResult = mvc.perform(post("/login").contentType(APPLICATION_JSON_UTF8)
+                .content(objectMapper.writeValueAsString(loginUser)))
+                .andExpect(status().isOk()).andReturn();
+
+        String content = loginResult.getResponse().getContentAsString();
+        mvc
+                .perform(get("/api/portaladmins")
+                        .header(AUTHORIZATION_HEADER, content))
+                .andExpect(status().isOk());
+
+    }
+
+    @Test
+    public void shouldAddNewUserLoginAndGetUsersWithSamePriviliges() throws Exception {
+
+        RoleDto portalAdminRole = conversionUtil.convertToDto(
+                roleRepository.getByName("ROLE_PORTAL_ADMINISTRATOR"));
+
+        UserDto userDto = UserDto.builder()
+                .firstName("name1")
+                .lastName("surname1")
+                .email("m78@company1.com")
+                .password("passMarjan1!")
+                .matchingPassword("passMarjan1!")
+                .roleDto(portalAdminRole)
+                .build();
+
+        MvcResult result = mvc.perform(post("/api/signup").contentType(APPLICATION_JSON_UTF8)
+                .content(objectMapper.writeValueAsString(userDto)))
+                .andExpect(status().isOk()).andReturn();
+
+        LoginUser loginUser = LoginUser.builder().email(userDto.getEmail()).password(userDto.getPassword()).build();
+
+        MvcResult loginResult = mvc.perform(post("/login").contentType(APPLICATION_JSON_UTF8)
+                .content(objectMapper.writeValueAsString(loginUser)))
+                .andExpect(status().isOk()).andReturn();
+
+        String content = loginResult.getResponse().getContentAsString();
+        mvc
+                .perform(get("/api/companyadmins")
+                        .header(AUTHORIZATION_HEADER, content))
+                .andExpect(status().isForbidden());
+
+    }
+
+    @Test
+    public void shouldAddNewUserLoginAndGetUnAutorzed() throws Exception {
+
+        RoleDto portalAdminRole = conversionUtil.convertToDto(
+                roleRepository.getByName("ROLE_PORTAL_ADMINISTRATOR"));
+
+        UserDto userDto = UserDto.builder()
+                .firstName("name1")
+                .lastName("surname1")
+                .email("m4@company1.com")
+                .password("passMarjan1!")
+                .matchingPassword("passMarjan1!")
+                .roleDto(portalAdminRole)
+                .build();
+
+        MvcResult result = mvc.perform(post("/api/signup").contentType(APPLICATION_JSON_UTF8)
+                .content(objectMapper.writeValueAsString(userDto)))
+                .andExpect(status().isOk()).andReturn();
+
+        LoginUser loginUser = LoginUser.builder().email(userDto.getEmail()).password(userDto.getPassword()).build();
+
+        MvcResult loginResult = mvc.perform(post("/login").contentType(APPLICATION_JSON_UTF8)
+                .content(objectMapper.writeValueAsString(loginUser)))
+                .andExpect(status().isOk()).andReturn();
+
+        String content = loginResult.getResponse().getContentAsString();
+        mvc
+                .perform(get("/api/advocates")
+                        .header(AUTHORIZATION_HEADER, content))
+                .andExpect(status().isForbidden());
+
+    }
+
+
+    @Test
+    public void shouldAddNewUserSuccessfully() throws Exception {
+
+        RoleDto portalAdminRole = conversionUtil.convertToDto(
+                roleRepository.getByName("ROLE_PORTAL_ADMINISTRATOR"));
+
+        UserDto userDto = UserDto.builder()
+                .firstName("name1")
+                .lastName("surname1")
+                .email("u3@company1.com")
+                .password("passMarjan1!")
+                .matchingPassword("passMarjan1!")
+                .roleDto(portalAdminRole)
+                .build();
+
+        MvcResult result = mvc.perform(post("/api/signup").contentType(APPLICATION_JSON_UTF8)
+                .content(objectMapper.writeValueAsString(userDto)))
+                .andExpect(status().isOk()).andReturn();
+
+        assertNotNull(result);
+
+    }
+
+    @Test
+    public void shouldLoginAfterRegistrationSuccessfully() throws Exception {
+        RoleDto portalAdminRole = conversionUtil.convertToDto(
+                roleRepository.getByName("ROLE_PORTAL_ADMINISTRATOR"));
+
+        UserDto userDto = UserDto.builder()
+                .firstName("name1")
+                .lastName("surname1")
+                .email("c7@company1.com")
+                .password("passMarjan1!")
+                .matchingPassword("passMarjan1!")
+                .roleDto(portalAdminRole)
+                .build();
+
+        MvcResult result = mvc.perform(post("/api/signup").contentType(APPLICATION_JSON_UTF8)
+                .content(objectMapper.writeValueAsString(userDto)))
+                .andExpect(status().isOk()).andReturn();
+
+        assertNotNull(result);
+        UserDto resultDto = objectMapper.readValue(result.getResponse().getContentAsString(), UserDto.class);
+        LoginUser loginUser = LoginUser.builder().email(resultDto.getEmail()).password(userDto.getPassword()).build();
+
+        testLoginUser(loginUser);
+    }
+
+    private void testLoginUser(LoginUser loginUser) throws Exception {
+
+        MvcResult result = mvc.perform(post("/login").contentType(APPLICATION_JSON_UTF8)
+                .content(objectMapper.writeValueAsString(loginUser)))
+                .andExpect(status().isOk()).andReturn();
+
+        String content = result.getResponse().getContentAsString();
+        mvc
+                .perform(get("/api/size")
+                        .header(AUTHORIZATION_HEADER, content))
+                .andExpect(status().isOk());
+    }
+
+
+    @Test
+    public void testLoggedUser_OK_Response() throws Exception {
+        LoginUser loginUser = LoginUser.builder()
+                .email("c1@company1.com")
+                .password("passMarjan1!")
+                .build();
+        testLoginUser(loginUser);
+
+    }
+
+
     // @WithMockUser(value = "at@t.com")
     @Test
     public void notLoggedUser_UnauthorizedResponse() throws Exception {
@@ -51,25 +238,6 @@ public class SecurityIT {
                 .andExpect(status().isUnauthorized());
     }
 
-    @Test
-    public void testLoggedUser_OK_Response() throws Exception {
-        LoginUser loginUser = new LoginUser();
-        loginUser.setEmail("t@t.com");
-        loginUser.setPassword("pass");
-
-        ObjectMapper mapper = new ObjectMapper();
-
-        MvcResult result = mvc.perform(post("/login").contentType(APPLICATION_JSON_UTF8)
-                .content(mapper.writeValueAsString(loginUser)))
-                .andExpect(status().isOk()).andReturn();
-
-        String content = result.getResponse().getContentAsString();
-        mvc
-                .perform(get("/api/size")
-                        .header(AUTHORIZATION_HEADER, content))
-                .andExpect(status().isOk());
-
-    }
 
     @Test
     public void shouldReturn_OK_afterSuccessfulLogin() throws Exception {
@@ -93,7 +261,7 @@ public class SecurityIT {
 
         ObjectMapper mapper = new ObjectMapper();
 
-      mvc.perform(post("/login").contentType(APPLICATION_JSON_UTF8)
+        mvc.perform(post("/login").contentType(APPLICATION_JSON_UTF8)
                 .content(mapper.writeValueAsString(loginUser)))
                 .andExpect(status().isUnauthorized());
 
@@ -126,7 +294,6 @@ public class SecurityIT {
                 .andExpect(status().isUnauthorized());
 
     }
-
 
 
 }

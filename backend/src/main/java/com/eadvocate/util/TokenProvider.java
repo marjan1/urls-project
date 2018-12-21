@@ -1,4 +1,4 @@
-package com.eadvocate.config.security;
+package com.eadvocate.util;
 
 
 import io.jsonwebtoken.*;

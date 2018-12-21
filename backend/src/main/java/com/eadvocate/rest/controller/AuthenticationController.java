@@ -1,10 +1,10 @@
 package com.eadvocate.rest.controller;
 
 
-import com.eadvocate.config.security.TokenProvider;
 import com.eadvocate.rest.dto.AuthToken;
 import com.eadvocate.rest.dto.LoginUser;
 import com.eadvocate.service.UserService;
+import com.eadvocate.util.TokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

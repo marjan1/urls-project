@@ -1,20 +1,21 @@
 package com.eadvocate.service;
 
 
-import com.eadvocate.persistence.model.User;
 import com.eadvocate.rest.dto.UserDto;
 
 import java.util.List;
 
 public interface UserService {
 
-    User save(UserDto user);
+    UserDto save(UserDto user);
 
-    List<User> findAll();
+    UserDto addNewUser(UserDto user);
+
+    List<UserDto> findAll();
 
     void delete(long id);
 
-    User findOne(String username);
+    UserDto findOne(String username);
 
-    User findById(Long id);
+    UserDto findById(Long id);
 }

@@ -1,6 +1,6 @@
 package com.eadvocate.config.security;
 
-import com.eadvocate.persistence.model.User;
+import com.eadvocate.rest.dto.LoginUser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -32,9 +32,9 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         try {
-            User user = new ObjectMapper().readValue(request.getInputStream(), User.class);
+            LoginUser loginUser = new ObjectMapper().readValue(request.getInputStream(), LoginUser.class);
             return this.authenticationManager
-                    .authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
+                    .authenticate(new UsernamePasswordAuthenticationToken(loginUser.getEmail(), loginUser.getPassword()));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
