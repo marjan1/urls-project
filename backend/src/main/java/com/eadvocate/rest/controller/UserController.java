@@ -3,6 +3,7 @@ package com.eadvocate.rest.controller;
 import com.eadvocate.rest.dto.UserDto;
 import com.eadvocate.service.UserService;
 import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +13,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
 @AllArgsConstructor
+@Log4j2
 public class UserController {
 
     private UserService userService;
@@ -19,6 +21,7 @@ public class UserController {
 
     @GetMapping(value = "/users")
     public List<UserDto> listUser() {
+        log.info("Request for getting all users received");
         return userService.findAll();
     }
 
