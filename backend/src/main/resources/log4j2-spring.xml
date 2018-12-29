@@ -7,11 +7,11 @@
                     pattern="%style{%d{ISO8601}}{black} %highlight{%-5level }[%style{%t}{bright,blue}] %style{%C{1.}}{bright,yellow}: %msg%n%throwable" />
         </Console>
 
-        <Failover name="FailoverAppender" primary="Syslog">
-            <Failovers>
-                <AppenderRef ref="ConsoleAppender" />
-            </Failovers>
-        </Failover>
+        <!--<Failover name="FailoverAppender" primary="Syslog">-->
+            <!--<Failovers>-->
+                <!--<AppenderRef ref="ConsoleAppender" />-->
+            <!--</Failovers>-->
+        <!--</Failover>-->
 
         <RollingFile name="RollingFile"
                      fileName="./logs/spring-boot-logger-log4j2.log"

@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -30,6 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("dev")
 public class SecurityIT {
 
     private static final MediaType APPLICATION_JSON_UTF8 = new MediaType(MediaType.APPLICATION_JSON.getType(),
@@ -205,6 +207,8 @@ public class SecurityIT {
         testLoginUser(loginUser);
     }
 
+
+
     private void testLoginUser(LoginUser loginUser) throws Exception {
 
         MvcResult result = mvc.perform(post("/login").contentType(APPLICATION_JSON_UTF8)
@@ -219,16 +223,6 @@ public class SecurityIT {
     }
 
 
-    @Test
-    public void testLoggedUser_OK_Response() throws Exception {
-        LoginUser loginUser = LoginUser.builder()
-                .email("c1@company1.com")
-                .password("passMarjan1!")
-                .build();
-        testLoginUser(loginUser);
-
-    }
-
 
     // @WithMockUser(value = "at@t.com")
     @Test
@@ -239,19 +233,7 @@ public class SecurityIT {
     }
 
 
-    @Test
-    public void shouldReturn_OK_afterSuccessfulLogin() throws Exception {
-        LoginUser loginUser = new LoginUser();
-        loginUser.setEmail("t@t.com");
-        loginUser.setPassword("pass");
 
-        ObjectMapper mapper = new ObjectMapper();
-
-        mvc.perform(post("/login").contentType(APPLICATION_JSON_UTF8)
-                .content(mapper.writeValueAsString(loginUser)))
-                .andExpect(status().isOk());
-
-    }
 
     @Test
     public void shouldReturn_Unauthorized_whenBadPasswordIsSend() throws Exception {

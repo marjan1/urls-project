@@ -1,0 +1,95 @@
+
+DROP TABLE IF EXISTS `privilege`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+   ;
+CREATE TABLE `privilege` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name_UNIQUE` (`name`)
+) ;
+
+INSERT INTO `privilege` VALUES (6,'COMPANY_ADMINISTRATOR'),(5,'ADD_ADVOCATE_ACCOUNTS'),(4,'ADD_ADVOCATE_COMPANY_ACCOUNTS'),(7,'CREATE_CASES'),(8,'ACCESS_TO_CASE_DOCUMENTATION'),(9,'ACCESS_TO_SENSIBLE_DOCUMENTS'),(10,'ACCESS_TO_DEDICATED_CASES');
+
+DROP TABLE IF EXISTS `role`;
+
+CREATE TABLE `role` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name_UNIQUE2` (`name`)
+);
+
+INSERT INTO `role` VALUES (2,'ROLE_PORTAL_ADMINISTRATOR'),(3,'ROLE_ADVOCATE_COMPANY_ADMINISTRATOR'),(4,'ROLE_ADVOCATE'),(5,'ROLE_APPRENTICE');
+
+DROP TABLE IF EXISTS `roles_privileges`;
+
+CREATE TABLE `roles_privileges` (
+  `role_id` bigint(20) NOT NULL,
+  `privilege_id` bigint(20) NOT NULL,
+  foreign key (`role_id`) references role(id),
+  foreign key (`privilege_id`) references privilege(id)
+
+);
+
+
+INSERT INTO `roles_privileges` VALUES (2,5),(2,4),(3,5),(4,7),(4,8),(4,9),(5,10);
+
+
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+   ;
+CREATE TABLE `user` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) DEFAULT NULL,
+  `first_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  `password` varchar(60) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+
+DROP TABLE IF EXISTS `users_roles`;
+
+CREATE TABLE `users_roles` (
+  `user_id` bigint(20) NOT NULL,
+  `role_id` bigint(20) NOT NULL,
+   foreign key (`user_id`) references user(id),
+   foreign key (`role_id`) references role(id)
+);
+
+
+/*
+insert into role values(null,"ROLE_PORTAL_ADMINISTRATOR");
+insert into role values(null,"ROLE_ADVOCATE_COMPANY_ADMINISTRATOR");
+insert into role values(null,"ROLE_ADVOCATE");
+insert into role values(null,"ROLE_APPRENTICE");
+
+insert into privilege values(null,"ADD_ADVOCATE_COMPANY_ACCOUNTS");
+insert into privilege values(null,"ADD_ADVOCATE_ACCOUNTS");
+insert into privilege values(null,"COMPANY_ADMINISTRATOR");
+insert into privilege values(null,"CREATE_CASES");
+insert into privilege values(null,"ACCESS_TO_CASE_DOCUMENTATION");
+insert into privilege values(null,"ACCESS_TO_SENSIBLE_DOCUMENTS");
+insert into privilege values(null,"ACCESS_TO_DEDICATED_CASES");
+
+ insert into roles_privileges (role_id, privilege_id) select (select id from role where role.name='ROLE_PORTAL_ADMINISTRATOR'),
+ (select id from privilege where privilege.name='ADD_ADVOCATE_ACCOUNTS');
+ insert into roles_privileges (role_id, privilege_id) select (select id from role where role.name='ROLE_PORTAL_ADMINISTRATOR'),
+ (select id from privilege where privilege.name='ADD_ADVOCATE_COMPANY_ACCOUNTS');
+
+ insert into roles_privileges (role_id, privilege_id) select (select id from role where role.name='ROLE_ADVOCATE_COMPANY_ADMINISTRATOR'),
+ (select id from privilege where privilege.name='ADD_ADVOCATE_ACCOUNTS');
+
+ insert into roles_privileges (role_id, privilege_id) select (select id from role where role.name='ROLE_ADVOCATE'),
+ (select id from privilege where privilege.name='CREATE_CASES');
+ insert into roles_privileges (role_id, privilege_id) select (select id from role where role.name='ROLE_ADVOCATE'),
+ (select id from privilege where privilege.name='ACCESS_TO_CASE_DOCUMENTATION');
+ insert into roles_privileges (role_id, privilege_id) select (select id from role where role.name='ROLE_ADVOCATE'),
+ (select id from privilege where privilege.name='ACCESS_TO_SENSIBLE_DOCUMENTS');
+
+ insert into roles_privileges (role_id, privilege_id) select (select id from role where role.name='ROLE_APPRENTICE'),
+ (select id from privilege where privilege.name='ACCESS_TO_DEDICATED_CASES');
+*/
+
+

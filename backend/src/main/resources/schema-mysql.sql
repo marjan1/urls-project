@@ -1,8 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `advocate6` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
-USE `advocate6`;
+CREATE DATABASE  IF NOT EXISTS `advocate10` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
+USE `advocate10`;
 -- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
 --
--- Host: localhost    Database: advocate6
+-- Host: localhost    Database: advocate10
 -- ------------------------------------------------------
 -- Server version	8.0.13
 
@@ -60,7 +60,7 @@ CREATE TABLE `privilege` (
 
 LOCK TABLES `privilege` WRITE;
 /*!40000 ALTER TABLE `privilege` DISABLE KEYS */;
-INSERT INTO `privilege` VALUES (6,'COMPANY_ADMINISTRATOR'),(5,'ADD_ADVOCATE_ACCOUNTS'),(4,'ADD_ADVOCATE_COMPANY_ACCOUNTS'),(7,'CREATE_CASES'),(8,'ACCESS_TO_CASE_DOCUMENTATION'),(9,'ACCESS_TO_SENSIBLE_DOCUMENTS'),(10,'ACCESS_TO_DEDICATED_CASES');
+INSERT INTO `privilege` VALUES (6,'MK()COMPANY_ADMINISTRATOR'),(5,'ADD_ADVOCATE_ACCOUNTS'),(4,'ADD_ADVOCATE_COMPANY_ACCOUNTS'),(7,'CREATE_CASES'),(8,'ACCESS_TO_CASE_DOCUMENTATION'),(9,'ACCESS_TO_SENSIBLE_DOCUMENTS'),(10,'ACCESS_TO_DEDICATED_CASES');
 /*!40000 ALTER TABLE `privilege` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -122,7 +122,7 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `user` (
-  `id` bigint(20) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) DEFAULT NULL,
   `first_name` varchar(255) DEFAULT NULL,
   `last_name` varchar(255) DEFAULT NULL,
