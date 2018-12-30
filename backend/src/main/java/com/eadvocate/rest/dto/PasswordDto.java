@@ -3,6 +3,9 @@ package com.eadvocate.rest.dto;
 
 import com.eadvocate.validation.ValidPassword;
 
+/**
+ * Dto class for password validation.
+ */
 public class PasswordDto {
 
     private String oldPassword;

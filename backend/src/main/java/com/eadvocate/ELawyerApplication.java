@@ -14,16 +14,27 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 
 import java.lang.reflect.Method;
 
+/**
+ * Main application class.
+ */
 @SpringBootApplication(scanBasePackages = {"com.eadvocate"})
 public class ELawyerApplication {
 
     @Value("${rest.api.base.path}")
     private String restApiBasePath;
 
+    /**
+     * Main method for starting the application.
+     * @param args
+     */
     public static void main(String[] args) {
         SpringApplication.run(ELawyerApplication.class, args);
     }
 
+    /**
+     * Configuration for accepting cross origin requests from location.
+     * @return WebMvcConfigurer bean
+     */
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
@@ -34,6 +45,11 @@ public class ELawyerApplication {
         };
     }
 
+    /**
+     * Request handler override for accepting the requests in the Angular app
+     * and not in the Spring boot Rest controllers.
+     * @return WebMvcRegistrations bean.
+     */
     @Bean
     public WebMvcRegistrations webMvcRegistrationsHandlerMapping() {
         ELawyerApplication application = this;

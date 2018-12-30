@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 
 import java.util.Collection;
 
-
+/**
+ * Dto class for validation and transfer Role data.
+ */
 @Data
 @Builder
 @NoArgsConstructor

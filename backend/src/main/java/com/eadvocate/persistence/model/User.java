@@ -6,6 +6,9 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.Set;
 
+/**
+ * User model class used for database interaction.
+ */
 @Entity
 @Data
 @Table(name = "user")

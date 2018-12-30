@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface UserService {
 
-    UserDto save(UserDto user);
+
 
     UserDto addNewUser(UserDto user);
 

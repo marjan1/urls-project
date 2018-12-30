@@ -9,6 +9,9 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.Set;
 
+/**
+ * Role model class used for database interaction.
+ */
 @Entity
 @Data
 @ToString(exclude = {"users", "privileges"})

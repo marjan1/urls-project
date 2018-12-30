@@ -1,4 +1,4 @@
-package com.eadvocate.validation;
+package com.eadvocate.validation.exception;
 
 @SuppressWarnings("serial")
 public class EmailExistsException extends Throwable {

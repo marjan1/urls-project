@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Size;
 
+/**
+ * Helper class for storing and validation of login user data.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

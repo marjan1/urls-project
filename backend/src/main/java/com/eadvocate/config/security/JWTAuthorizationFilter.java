@@ -16,16 +16,36 @@ import java.io.IOException;
 
 import static com.eadvocate.util.Constants.*;
 
-
+/**
+ * This clasa extends BasicAuthenticationFilter from Spring security in order to override
+ * the filtering process and check if the received request have appropriate Jwt token.
+ * If Jwt token is present id parse it in order to take appropriate data and continue
+ * withe authorization process.
+ */
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
     private final UserServiceImpl userServiceImpl;
 
+    /**
+     * Class constructor for supplying needed dependencies.
+     * @param authenticationManager - AuthenticationManager from Spring security
+     * @param userServiceImpl - UserServiceImpl - custom implementation of UserDetailService interface.
+     */
     public JWTAuthorizationFilter(AuthenticationManager authenticationManager, UserServiceImpl userServiceImpl) {
         super(authenticationManager);
         this.userServiceImpl = userServiceImpl;
     }
 
+    /**
+     * Check if the received request have appropriate Jwt token.
+     *  If Jwt token is present id parse it in order to take appropriate data and continue
+     *  withe authorization process.
+     * @param request - HttpServletRequest
+     * @param response - HttpServletResponse
+     * @param chain - FilterChain
+     * @throws IOException - IOException
+     * @throws ServletException - ServletException
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,

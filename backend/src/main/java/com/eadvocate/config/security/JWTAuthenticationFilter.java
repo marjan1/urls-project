@@ -11,7 +11,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -20,19 +19,40 @@ import java.util.Date;
 import static com.eadvocate.util.Constants.*;
 
 /**
- * @author William Suane for DevDojo on 8/24/17.
+ * JWTAuthenticationFilter that implements authentication process when request on "/login"
+ * url is received. The class extents UsernamePasswordAuthenticationFilter from Spring Security
+ * and overrides the attempt authentication and success authentication.
  */
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+
     private AuthenticationManager authenticationManager;
 
-    public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
+    private ObjectMapper objectMapper;
+
+    /**
+     * Constructor for initializing the class.
+     *
+     * @param authenticationManager - from Spring Security used for authentication purposes
+     * @param objectMapper          - for transferring data from HttpServletRequest to LoginUser object.
+     */
+    public JWTAuthenticationFilter(AuthenticationManager authenticationManager, ObjectMapper objectMapper) {
         this.authenticationManager = authenticationManager;
+        this.objectMapper = objectMapper;
     }
 
+    /**
+     * When reguest is send on "/login" for authentication this method is called to get
+     * data from the request and call authentication manager to attempt authentication.
+     *
+     * @param request  - HttpServletRequest
+     * @param response 0 HttpServletResponse
+     * @return - Spring security Authentication
+     * @throws AuthenticationException - Spring security exception
+     */
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         try {
-            LoginUser loginUser = new ObjectMapper().readValue(request.getInputStream(), LoginUser.class);
+            LoginUser loginUser = this.objectMapper.readValue(request.getInputStream(), LoginUser.class);
             return this.authenticationManager
                     .authenticate(new UsernamePasswordAuthenticationToken(loginUser.getEmail(), loginUser.getPassword()));
         } catch (IOException e) {
@@ -40,11 +60,23 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         }
     }
 
+    /**
+     * After successful authentication Jwt token need to be created and set to response
+     * in order to be used in future requests.
+     *
+     * @param request    HttpServletRequest
+     * @param response   HttpServletResponse
+     * @param chain      FilterChain
+     * @param authResult Authentication - result form authentication, from which username is taken
+     *                   and used in Jwt token creation.
+     * @throws IOException
+     */
     @Override
     protected void successfulAuthentication(HttpServletRequest request,
                                             HttpServletResponse response,
                                             FilterChain chain,
-                                            Authentication authResult) throws IOException, ServletException {
+                                            Authentication authResult) throws IOException {
+
         String username = ((org.springframework.security.core.userdetails.User) authResult.getPrincipal()).getUsername();
         String token = Jwts
                 .builder()

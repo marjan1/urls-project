@@ -12,6 +12,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
 
+/**
+ * Conversion util class for converting Model(Entity) classes to
+ * appropriate Dto classes and vice versa.
+ */
 @Component
 @AllArgsConstructor
 public class ConversionUtil {

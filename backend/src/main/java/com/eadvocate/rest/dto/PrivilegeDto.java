@@ -9,6 +9,9 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.Size;
 import java.util.Set;
 
+/**
+ * Dto class for validation and transfer Privilege data.
+ */
 @Data
 @Builder
 @NoArgsConstructor

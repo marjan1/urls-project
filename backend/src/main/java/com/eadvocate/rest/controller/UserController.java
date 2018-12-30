@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * Rest controller class used for requests and responses
+ * related to User.
+ */
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
 @AllArgsConstructor
@@ -30,8 +34,16 @@ public class UserController {
         return userService.findAll().size();
     }
 
-    @PostMapping (value = "/signup")
-    public UserDto addNewUser(@RequestBody @Valid UserDto userDto){
+    /**
+     * Receives a request for adding new user.
+     * Validate recived data and call appropriate service implementation.
+     *
+     * @param userDto UserDto Dto object populated with data that is send in the request.
+     * @return UserDto with data from the user that is added.
+     */
+    @PostMapping(value = "/signup")
+    public UserDto addNewUser(@RequestBody @Valid UserDto userDto) {
+        log.info("Request for adding new user with data {} received", userDto);
         return userService.addNewUser(userDto);
     }
 

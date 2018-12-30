@@ -1,5 +1,8 @@
 package com.eadvocate.rest.dto;
 
+/**
+ * Helper class for storing AuthToken data.
+ */
 public class AuthToken {
 
     private String token;
