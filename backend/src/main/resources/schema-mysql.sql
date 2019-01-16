@@ -114,26 +114,36 @@ INSERT INTO `roles_privileges` VALUES (2,5),(2,4),(3,5),(4,7),(4,8),(4,9),(5,10)
 /*!40000 ALTER TABLE `roles_privileges` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Table structure for table `user`
---
+DROP TABLE IF EXISTS `status`;
+
+create TABLE `status` (
+  `id` smallint(2) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+   PRIMARY KEY (`id`)
+);
+
+
+INSERT INTO `status` VALUES (1,'Active','Active status');
+INSERT INTO `status` VALUES (2,'Deleted','Deleted status');
 
 DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `email` varchar(255) DEFAULT NULL,
-  `first_name` varchar(255) DEFAULT NULL,
-  `last_name` varchar(255) DEFAULT NULL,
-  `password` varchar(60) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `email` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `surname` varchar(255) NOT NULL,
+  `password` varchar(60) NOT NULL,
+  `phone` varchar(45) DEFAULT NULL,
+  `status_id` SMALLINT(2) NOT NULL,
+  `account_group_level_id` smallint (2) NOT NULL,
+  PRIMARY KEY (`id`),
+  foreign key (`status_id`) references status(id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `user`
---
+
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;

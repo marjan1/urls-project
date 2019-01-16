@@ -36,18 +36,33 @@ CREATE TABLE `roles_privileges` (
 INSERT INTO `roles_privileges` VALUES (2,5),(2,4),(3,5),(4,7),(4,8),(4,9),(5,10);
 
 
+DROP TABLE IF EXISTS `status`;
+
+create TABLE `status` (
+  `id` smallint(2) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+INSERT INTO `status` VALUES (1,'Active','Active status');
+INSERT INTO `status` VALUES (2,'Deleted','Deleted status');
+
 DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
    ;
 CREATE TABLE `user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `email` varchar(255) DEFAULT NULL,
-  `first_name` varchar(255) DEFAULT NULL,
-  `last_name` varchar(255) DEFAULT NULL,
-  `password` varchar(60) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `email` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `surname` varchar(255) NOT NULL,
+  `password` varchar(60) NOT NULL,
+  `phone` VARCHAR(45) DEFAULT NULL,
+  `status_id` SMALLINT(2) NOT NULL,
+  `account_group_level_id` SMALLINT(2) NOT NULL,
+  PRIMARY KEY (`id`),
+  foreign key (`status_id`) references status(id)
 );
-
 
 DROP TABLE IF EXISTS `users_roles`;
 

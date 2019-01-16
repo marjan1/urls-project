@@ -4,6 +4,7 @@ import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 /**
@@ -20,18 +21,31 @@ public class User {
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
-    private String firstName;
+    @NotNull
+    private String name;
 
-    private String lastName;
+    @NotNull
+    private String surname;
 
+    @NotNull
     private String email;
 
+    @NotNull
     @Column(length = 60)
     private String password;
+
+    private String phone;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Set<Role> roles;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "status_id")
+    private Status status;
+
+    @Column(name = "ACCOUNT_GROUP_LEVEL_ID")
+    private Short accountGroupLevel;
 
     public User() {
         super();

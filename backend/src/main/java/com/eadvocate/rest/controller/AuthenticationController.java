@@ -1,45 +1,37 @@
 package com.eadvocate.rest.controller;
 
 
-import com.eadvocate.rest.dto.AuthToken;
-import com.eadvocate.rest.dto.LoginUser;
+import com.eadvocate.rest.dto.UserDto;
 import com.eadvocate.service.UserService;
-import com.eadvocate.util.TokenProvider;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.*;
+import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/token")
+@AllArgsConstructor
+@Log4j2
 public class AuthenticationController {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private TokenProvider jwtTokenUtil;
-
-    @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/generate-token", method = RequestMethod.POST)
-    public ResponseEntity<?> register(@RequestBody LoginUser loginUser) throws AuthenticationException {
-
-        final Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        loginUser.getEmail(),
-                        loginUser.getPassword()
-                )
-        );
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        final String token = jwtTokenUtil.generateToken(authentication);
-        return ResponseEntity.ok(new AuthToken(token));
+    /**
+     * Receives a request for adding new user.
+     * Validate recived data and call appropriate service implementation.
+     *
+     * @param userDto UserDto Dto object populated with data that is send in the request.
+     * @return UserDto with data from the user that is added.
+     */
+    @PostMapping(value = "/signup")
+    public UserDto signupNewUser(@RequestBody @Valid UserDto userDto) {
+        log.info("Request for signup new user with data {} received", userDto);
+        return userService.addNewUser(userDto);
     }
+
 
 }

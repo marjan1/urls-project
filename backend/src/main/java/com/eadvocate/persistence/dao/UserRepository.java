@@ -1,6 +1,8 @@
 package com.eadvocate.persistence.dao;
 
 import com.eadvocate.persistence.model.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
@@ -24,5 +26,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
      */
     @Override
     void delete(User user);
+
+    /**
+     * Find all users that are in the page fit
+     * @param pageRequest page information
+     * @return page with users
+     */
+    Page<User>findAll(Pageable pageRequest);
 
 }

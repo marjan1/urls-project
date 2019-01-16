@@ -22,6 +22,19 @@ public class ConversionUtil {
 
     private ModelMapper modelMapper;
 
+    /**
+     * Convesrion of one object to another
+     *
+     * @param object     source object
+     * @param targetType class of target object
+     * @param <E>        type of source object
+     * @param <D>        type of target object
+     * @return instance of the target object populated with data from the source object
+     */
+    public <E, D> D covertObjectTo(E object, Class<D> targetType) {
+        return targetType.cast(modelMapper.map(object, targetType));
+    }
+
     public UserDto convertToDto(User user) {
         UserDto userDto = modelMapper.map(user, UserDto.class);
         userDto.setRoleDtos(user.getRoles().stream()
@@ -37,7 +50,7 @@ public class ConversionUtil {
     }
 
     public RoleDto convertToDto(Role role) {
-         RoleDto roleDto = modelMapper.map(role, RoleDto.class);
+        RoleDto roleDto = modelMapper.map(role, RoleDto.class);
 //        roleDto.setUserDtos(role.getUsers().stream()
 //                .map(this::convertToDto).collect(Collectors.toSet()));
         roleDto.setPrivilegeDtos(role.getPrivileges().stream()

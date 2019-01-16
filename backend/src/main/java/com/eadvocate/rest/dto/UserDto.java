@@ -21,12 +21,12 @@ public class UserDto {
 
     private Long id;
     @NotNull
-    @Size(min = 1, message = "{Size.userDto.firstName}")
-    private String firstName;
+    @Size(min = 1, message = "{Size.userDto.name}")
+    private String name;
 
     @NotNull
-    @Size(min = 1, message = "{Size.userDto.lastName}")
-    private String lastName;
+    @Size(min = 1, message = "{Size.userDto.surname}")
+    private String surname;
 
     @ValidPassword
     private String password;
@@ -40,8 +40,16 @@ public class UserDto {
     @Size(min = 1, message = "{Size.userDto.email}")
     private String email;
 
+    private String phone;
+
     @Singular
     private Set<RoleDto> roleDtos;
+
+    @NotNull
+    private StatusDto statusDto;
+
+    @NotNull
+    private Short accountGroupLevel;
 
 
 }
