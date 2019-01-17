@@ -31,10 +31,11 @@ public class ConversionUtil {
      * @param <D>        type of target object
      * @return instance of the target object populated with data from the source object
      */
-    public <E, D> D covertObjectTo(E object, Class<D> targetType) {
+    public <E, D> D convertObjectTo(E object, Class<D> targetType) {
         return targetType.cast(modelMapper.map(object, targetType));
     }
 
+    @Deprecated
     public UserDto convertToDto(User user) {
         UserDto userDto = modelMapper.map(user, UserDto.class);
         userDto.setRoleDtos(user.getRoles().stream()
@@ -42,6 +43,7 @@ public class ConversionUtil {
         return userDto;
     }
 
+    @Deprecated
     public User convertToEntity(UserDto userDto) {
         User user = modelMapper.map(userDto, User.class);
         user.setRoles(userDto.getRoleDtos().stream()
@@ -49,6 +51,7 @@ public class ConversionUtil {
         return user;
     }
 
+    @Deprecated
     public RoleDto convertToDto(Role role) {
         RoleDto roleDto = modelMapper.map(role, RoleDto.class);
 //        roleDto.setUserDtos(role.getUsers().stream()
@@ -58,6 +61,7 @@ public class ConversionUtil {
         return roleDto;
     }
 
+    @Deprecated
     public Role convertToEntity(RoleDto roleDto) {
         Role role = modelMapper.map(roleDto, Role.class);
 //        role.setUsers(roleDto.getUserDtos().stream()
@@ -67,6 +71,7 @@ public class ConversionUtil {
         return role;
     }
 
+    @Deprecated
     public PrivilegeDto convertToDto(Privilege privilege) {
         PrivilegeDto privilegeDto = modelMapper.map(privilege, PrivilegeDto.class);
 //        privilegeDto.setRoleDtos(privilege.getRoles().stream()
@@ -74,6 +79,7 @@ public class ConversionUtil {
         return privilegeDto;
     }
 
+    @Deprecated
     public Privilege convertToEntity(PrivilegeDto privilegeDto) {
         Privilege privilege = modelMapper.map(privilegeDto, Privilege.class);
 //        privilege.setRoles(privilegeDto.getRoleDtos().stream()

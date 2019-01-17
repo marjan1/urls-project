@@ -127,6 +127,24 @@ create TABLE `status` (
 INSERT INTO `status` VALUES (1,'Active','Active status');
 INSERT INTO `status` VALUES (2,'Deleted','Deleted status');
 
+DROP TABLE IF EXISTS `advocate_company`;
+
+create TABLE `advocate_company` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `phone` varchar(45) DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
+  `embs` varchar(100) DEFAULT NULL,
+  `edbs` varchar(100) DEFAULT NULL,
+  `license` varchar(255) DEFAULT NULL,
+  `digital_signature` varchar(255) DEFAULT NULL,
+  `status_id` SMALLINT(2) NOT NULL,
+   PRIMARY KEY (`id`),
+   foreign key (`status_id`) references status(id)
+);
+
+
 DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
@@ -139,8 +157,10 @@ CREATE TABLE `user` (
   `phone` varchar(45) DEFAULT NULL,
   `status_id` SMALLINT(2) NOT NULL,
   `account_group_level_id` smallint (2) NOT NULL,
+  `advocate_company_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  foreign key (`status_id`) references status(id)
+  foreign key (`status_id`) references status(id),
+  foreign key (`advocate_company_id`) references advocate_company(id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 

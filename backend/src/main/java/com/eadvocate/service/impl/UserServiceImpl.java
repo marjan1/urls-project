@@ -61,6 +61,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     /**
      * Method for getting user by email and if exist change his status to Deleted, save and return
+     *
      * @param email String param
      * @return saved user with Deleted status
      */
@@ -77,6 +78,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     /**
      * Method for getting user by email and if exist change his status to Active , save and return
+     *
      * @param email String param
      * @return saved user with Active status
      */
@@ -93,23 +95,26 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     /**
      * Get all users for appropriate page
+     *
      * @param pageNumber number of the page
-     * @param size size of the page
+     * @param size       size of the page
      * @return page with the users
      */
     @Override
     public Page<UserDto> findAll(int pageNumber, int size) {
         Pageable page = PageRequest.of(pageNumber, size, Sort.by("name"));
 
-        List<UserDto> dtos = userRepository.findAll(page).stream().map(user -> conversionUtil.convertToDto(user))
+        List<UserDto> dtos = userRepository.findAll(page).stream().map(user -> conversionUtil.convertObjectTo(user, UserDto.class))
                 .collect(Collectors.toList());
 
         Page<UserDto> userDtoPage = new PageImpl<>(dtos, page, size);
         return userDtoPage;
     }
 
+
     /**
      * Check is email exist in the system(db) and return true or false appropriate.
+     *
      * @param email String param
      * @return true or false are appropriate response
      */
@@ -176,9 +181,9 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     public UserDto addNewUser(UserDto userDto) {
         log.info("Add new user with {}", userDto);
         userDto.setPassword(bcryptEncoder.encode(userDto.getPassword()));
-        User user = conversionUtil.convertToEntity(userDto);
+        User user = conversionUtil.convertObjectTo(userDto, User.class);
         User save1 = this.userRepository.save(user);
-        UserDto userDto1 = conversionUtil.covertObjectTo(save1, UserDto.class);
+        UserDto userDto1 = conversionUtil.convertObjectTo(save1, UserDto.class);
         return userDto1;
 
     }

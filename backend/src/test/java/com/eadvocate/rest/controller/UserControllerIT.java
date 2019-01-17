@@ -93,7 +93,7 @@ public class UserControllerIT {
                 .password("passMarjan1!")
                 .matchingPassword("passMarjan1!")
                 .roleDto(portalAdminRoleForNewUser)
-                .statusDto(conversionUtil.covertObjectTo(statusRepository.getByName("Active"), StatusDto.class))
+                .statusDto(conversionUtil.convertObjectTo(statusRepository.getByName("Active"), StatusDto.class))
                 .accountGroupLevel((short) 1)
                 .build();
 
@@ -156,7 +156,7 @@ public class UserControllerIT {
                 .password("passMarjan1!")
                 .matchingPassword("passMarjan1!")
                 .roleDto(roleAdvocate)
-                .statusDto(conversionUtil.covertObjectTo(statusRepository.getByName("Active"), StatusDto.class))
+                .statusDto(conversionUtil.convertObjectTo(statusRepository.getByName("Active"), StatusDto.class))
                 .accountGroupLevel((short) 1)
                 .build();
 
@@ -208,7 +208,7 @@ public class UserControllerIT {
                     .matchingPassword("passMarjan1!" + i)
                     .phone("phoneN" + i)
                     .roleDto(roleAdvocate)
-                    .statusDto(conversionUtil.covertObjectTo(statusRepository.getByName("Active"), StatusDto.class))
+                    .statusDto(conversionUtil.convertObjectTo(statusRepository.getByName("Active"), StatusDto.class))
                     .accountGroupLevel((short) 1)
                     .build();
 
@@ -251,7 +251,7 @@ public class UserControllerIT {
         RoleDto portalAdminRole = conversionUtil.convertToDto(
                 roleRepository.getByName("ROLE_PORTAL_ADMINISTRATOR"));
 
-        StatusDto statusDto = conversionUtil.covertObjectTo(statusRepository.getByName("Active"), StatusDto.class);
+        StatusDto statusDto = conversionUtil.convertObjectTo(statusRepository.getByName("Active"), StatusDto.class);
 
         UserDto userDto = UserDto.builder()
                 .name("name1")

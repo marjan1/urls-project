@@ -44,6 +44,10 @@ public class User {
     @JoinColumn(name = "status_id")
     private Status status;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "advocate_company_id")
+    private AdvocateCompany advocateCompany;
+
     @Column(name = "ACCOUNT_GROUP_LEVEL_ID")
     private Short accountGroupLevel;
 

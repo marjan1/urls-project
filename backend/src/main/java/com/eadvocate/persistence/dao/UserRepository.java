@@ -1,5 +1,6 @@
 package com.eadvocate.persistence.dao;
 
+import com.eadvocate.persistence.model.AdvocateCompany;
 import com.eadvocate.persistence.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,5 +34,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
      * @return page with users
      */
     Page<User>findAll(Pageable pageRequest);
+
+    Page<User>findAllByAdvocateCompany(Pageable pageRequest, AdvocateCompany advocateCompany);
 
 }
