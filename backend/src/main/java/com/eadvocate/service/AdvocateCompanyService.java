@@ -32,20 +32,22 @@ public class AdvocateCompanyService {
 
     /**
      * Method for adding new Advocate company.
+     *
      * @param advocateCompanyDto AdvocateCompanyDto
      * @return AdvocateCompanyDto added object
      */
-    public AdvocateCompanyDto addAdvocateCompany(AdvocateCompanyDto advocateCompanyDto){
-        log.info("Adding new advocate company with name {}",advocateCompanyDto.getName());
-        AdvocateCompany advocateCompany = conversionUtil.convertObjectTo(advocateCompanyDto,AdvocateCompany.class);
-        advocateCompany = advocateCompanyRepository.save(advocateCompany);
-        return  conversionUtil.convertObjectTo(advocateCompany,AdvocateCompanyDto.class);
+    public AdvocateCompanyDto add(AdvocateCompanyDto advocateCompanyDto) {
+        log.info("Adding new advocate company with name {}", advocateCompanyDto.getName());
+        AdvocateCompany advocateCompany = advocateCompanyRepository
+                .save(conversionUtil.convertObjectTo(advocateCompanyDto, AdvocateCompany.class));
+        return conversionUtil.convertObjectTo(advocateCompany, AdvocateCompanyDto.class);
     }
 
     /**
      * Method that returns a Page with Advocate companies.
+     *
      * @param pageNumber number of the page
-     * @param size of the page
+     * @param size       of the page
      * @return the page
      */
     public Page<AdvocateCompanyDto> getPage(int pageNumber, int size) {
@@ -53,7 +55,7 @@ public class AdvocateCompanyService {
         Pageable page = PageRequest.of(pageNumber, size, Sort.by("name"));
 
         List<AdvocateCompanyDto> dtos = advocateCompanyRepository.findAll(page).stream()
-                .map(advocateCompany -> conversionUtil.convertObjectTo(advocateCompany,AdvocateCompanyDto.class))
+                .map(advocateCompany -> conversionUtil.convertObjectTo(advocateCompany, AdvocateCompanyDto.class))
                 .collect(Collectors.toList());
 
         Page<AdvocateCompanyDto> userDtoPage = new PageImpl<>(dtos, page, size);
@@ -62,11 +64,12 @@ public class AdvocateCompanyService {
 
     /**
      * Method for activation of Advocate company if is not already activated.
+     *
      * @param advocateCompanyDto AdvocateCompanyDto
      * @return AdvocateCompanyDto
      */
-    public AdvocateCompanyDto activateAdvocateCompany(AdvocateCompanyDto advocateCompanyDto){
-        if(!advocateCompanyDto.getStatus().getName().equals("Active")) {
+    public AdvocateCompanyDto activateAdvocateCompany(AdvocateCompanyDto advocateCompanyDto) {
+        if (!advocateCompanyDto.getStatus().getName().equals("Active")) {
             AdvocateCompany advocateCompany = conversionUtil.convertObjectTo(advocateCompanyDto, AdvocateCompany.class);
             Status activeStatus = statusRepository.getByName("Active");
             advocateCompany.setStatus(activeStatus);
@@ -78,11 +81,12 @@ public class AdvocateCompanyService {
 
     /**
      * Method for deactivation of Advocate company if is not already deactivated.
+     *
      * @param advocateCompanyDto AdvocateCompanyDto
      * @return AdvocateCompanyDto
      */
-    public AdvocateCompanyDto deactivateAdvocateCompany(AdvocateCompanyDto advocateCompanyDto){
-        if(!advocateCompanyDto.getStatus().getName().equals("Deleted")) {
+    public AdvocateCompanyDto deactivateAdvocateCompany(AdvocateCompanyDto advocateCompanyDto) {
+        if (!advocateCompanyDto.getStatus().getName().equals("Deleted")) {
             AdvocateCompany advocateCompany = conversionUtil.convertObjectTo(advocateCompanyDto, AdvocateCompany.class);
             Status deleteStatus = statusRepository.getByName("Deleted");
             advocateCompany.setStatus(deleteStatus);
@@ -91,7 +95,6 @@ public class AdvocateCompanyService {
         }
         return advocateCompanyDto;
     }
-
 
 
 }

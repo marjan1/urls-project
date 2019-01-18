@@ -88,7 +88,7 @@ create TABLE `client` (
 DROP TABLE IF EXISTS `client_company`;
 
 create TABLE `client_company` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) NOT NULL,
   `embs` varchar(7) NOT NULL,
   `edb` varchar(13) DEFAULT NULL,
   `manager_name` varchar(100) DEFAULT NULL,
@@ -99,7 +99,7 @@ create TABLE `client_company` (
 DROP TABLE IF EXISTS `client_person`;
 
 create TABLE `client_person` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) NOT NULL,
   `personal_id` varchar(255) NOT NULL,
   `embg` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -133,6 +133,71 @@ CREATE TABLE `users_roles` (
    foreign key (`user_id`) references user(id),
    foreign key (`role_id`) references role(id)
 );
+
+
+create TABLE `opposite_side_advocate` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `surname` varchar(255) NOT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `phone` varchar(45) DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
+   PRIMARY KEY (`id`)
+);
+
+create TABLE `opposite_side` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `phone` varchar(45) DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
+   PRIMARY KEY (`id`)
+);
+
+
+create TABLE `opposite_side_person` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `embg` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  foreign key (`id`) references opposite_side(id)
+);
+
+create TABLE `opposite_side_company` (
+  `id` bigint(20) NOT NULL,
+  `embs` varchar(7) DEFAULT NULL,
+  `edb` varchar(13) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  foreign key (`id`) references opposite_side(id)
+);
+
+create TABLE `government_authorities_opposite_side` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+create TABLE `court` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `address` varchar(255) DEFAULT NULL,
+   `archive_phone` varchar(45) DEFAULT NULL,
+  `archive_email` varchar(255) NOT NULL,
+   PRIMARY KEY (`id`)
+);
+
+
+create TABLE `judge` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `surname` varchar(255) DEFAULT NULL,
+  `judge_id` varchar(255) DEFAULT NULL,
+  `court_id` bigint(20) NOT NULL,
+   PRIMARY KEY (`id`),
+   foreign key (`court_id`) references court(id)
+);
+
+
 
 
 /*

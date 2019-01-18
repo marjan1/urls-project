@@ -29,21 +29,23 @@ public class ClientCompanyService {
 
     /**
      * Method for adding client company to the system.
+     *
      * @param clientCompanyDto ClientCompanyDto
      * @return added ClientCompanyDto
      */
-    public ClientCompanyDto addClientCompany(ClientCompanyDto clientCompanyDto) {
+    public ClientCompanyDto add(ClientCompanyDto clientCompanyDto) {
         log.info("Adding new client company with name {}", clientCompanyDto.getName());
-        ClientCompany clientCompany = conversionUtil.convertObjectTo(clientCompanyDto, ClientCompany.class);
-        ClientCompany savedClientCompany = this.clientCompanyRepository.save(clientCompany);
+        ClientCompany savedClientCompany = this.clientCompanyRepository
+                .save(conversionUtil.convertObjectTo(clientCompanyDto, ClientCompany.class));
         return conversionUtil.convertObjectTo(savedClientCompany, ClientCompanyDto.class);
     }
 
     /**
      * Method for getting page of client companies for advocate company.
+     *
      * @param advocateCompanyDto AdvocateCompanyDto
-     * @param pageNumber int
-     * @param size int
+     * @param pageNumber         int
+     * @param size               int
      * @return Page
      */
     public Page<ClientCompanyDto> getPage(AdvocateCompanyDto advocateCompanyDto, int pageNumber, int size) {

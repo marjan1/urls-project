@@ -47,6 +47,6 @@ public class ClientPersonController {
     @PostMapping(value = "/add")
     public ClientPersonDto addClientPerson( @RequestBody @Valid ClientPersonDto clientPersonDto) {
         log.info("Request for adding new client person with name {}",clientPersonDto.getName());
-        return clientCompanyService.addClientPerson(clientPersonDto);
+        return clientCompanyService.add(clientPersonDto);
     }
 }

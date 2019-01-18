@@ -29,21 +29,23 @@ public class ClientPersonService {
 
     /**
      * Method for adding client person to the system.
+     *
      * @param clientPersonDto ClientPersonDto
      * @return added ClientPersonDto
      */
-    public ClientPersonDto addClientPerson(ClientPersonDto clientPersonDto) {
+    public ClientPersonDto add(ClientPersonDto clientPersonDto) {
         log.info("Adding new client person with name {}", clientPersonDto.getName());
-        ClientPerson clientPerson = conversionUtil.convertObjectTo(clientPersonDto, ClientPerson.class);
-        ClientPerson savedClientPerson = this.clientPersonRepository.save(clientPerson);
+        ClientPerson savedClientPerson = this.clientPersonRepository
+                .save(conversionUtil.convertObjectTo(clientPersonDto, ClientPerson.class));
         return conversionUtil.convertObjectTo(savedClientPerson, ClientPersonDto.class);
     }
 
     /**
      * Method for getting page of client persons for advocate company.
+     *
      * @param advocateCompanyDto AdvocateCompanyDto
-     * @param pageNumber int
-     * @param size int
+     * @param pageNumber         int
+     * @param size               int
      * @return Page
      */
     public Page<ClientPersonDto> getPage(AdvocateCompanyDto advocateCompanyDto, int pageNumber, int size) {

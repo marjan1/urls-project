@@ -71,7 +71,7 @@ public class AdvocateCompanyController {
     @PostMapping(value = "/add")
     public AdvocateCompanyDto addAdvocateCompany(@RequestBody @Valid AdvocateCompanyDto advocateCompanyDto) {
         log.info("Request for adding of advocate company with name {} received", advocateCompanyDto.getName());
-        return advocateCompanyService.addAdvocateCompany(advocateCompanyDto);
+        return advocateCompanyService.add(advocateCompanyDto);
     }
 
 
