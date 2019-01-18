@@ -1,6 +1,5 @@
 package com.eadvocate.persistence.model;
 
-import com.eadvocate.util.CompanyType;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -8,13 +7,15 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+
 /**
- * AdvocateCompany model class used for database interaction.
+ * Client model class used for database interaction.
  */
 @Entity
+@Table(name = "client")
+@Inheritance(strategy = InheritanceType.JOINED)
 @Data
-@Table(name = "advocate_company")
-public class AdvocateCompany {
+public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
@@ -33,30 +34,15 @@ public class AdvocateCompany {
     @NotNull
     private String email;
 
-    @Size(max = 100)
-    private String embs;
-
-    @Size(max = 100)
-    private String edbs;
-
-    private String license;
-
-    private String digitalSignature;
-
     @NotNull
-    @Enumerated
-    @Column(columnDefinition = "smallint")
-    private CompanyType type;
+    private String accountNumber;
 
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "status_id")
-    private Status status;
+    @JoinColumn(name = "advocate_company_id")
+    private AdvocateCompany advocateCompany;
 
-
-    public AdvocateCompany() {
+    public Client() {
         super();
     }
-
-
 }

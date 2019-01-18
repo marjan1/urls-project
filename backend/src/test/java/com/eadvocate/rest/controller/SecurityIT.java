@@ -1,6 +1,6 @@
 package com.eadvocate.rest.controller;
 
-import com.eadvocate.persistence.dao.RoleRepository;
+import com.eadvocate.persistence.repo.RoleRepository;
 import com.eadvocate.rest.dto.LoginUser;
 import com.eadvocate.rest.dto.RoleDto;
 import com.eadvocate.rest.dto.UserDto;
@@ -64,8 +64,8 @@ public class SecurityIT {
     @Test
     public void shouldAddNewUserLoginAndGetUsersWithSameRole() throws Exception {
 
-        RoleDto portalAdminRole = conversionUtil.convertToDto(
-                roleRepository.getByName("ROLE_PORTAL_ADMINISTRATOR"));
+        RoleDto portalAdminRole = conversionUtil.convertObjectTo(
+                roleRepository.getByName("ROLE_PORTAL_ADMINISTRATOR"),RoleDto.class);
 
         UserDto userDto = UserDto.builder()
                 .name("name1")
@@ -97,8 +97,9 @@ public class SecurityIT {
     @Test
     public void shouldAddNewUserLoginAndGetUsersWithSamePriviliges() throws Exception {
 
-        RoleDto portalAdminRole = conversionUtil.convertToDto(
-                roleRepository.getByName("ROLE_PORTAL_ADMINISTRATOR"));
+
+        RoleDto portalAdminRole = conversionUtil.convertObjectTo(
+                roleRepository.getByName("ROLE_PORTAL_ADMINISTRATOR"),RoleDto.class);
 
         UserDto userDto = UserDto.builder()
                 .name("name1")
@@ -130,8 +131,8 @@ public class SecurityIT {
     @Test
     public void shouldAddNewUserLoginAndGetUnAutorzed() throws Exception {
 
-        RoleDto portalAdminRole = conversionUtil.convertToDto(
-                roleRepository.getByName("ROLE_PORTAL_ADMINISTRATOR"));
+        RoleDto portalAdminRole = conversionUtil.convertObjectTo(
+                roleRepository.getByName("ROLE_PORTAL_ADMINISTRATOR"),RoleDto.class);
 
         UserDto userDto = UserDto.builder()
                 .name("name1")
@@ -164,9 +165,8 @@ public class SecurityIT {
     @Test
     public void shouldAddNewUserSuccessfully() throws Exception {
 
-        RoleDto portalAdminRole = conversionUtil.convertToDto(
-                roleRepository.getByName("ROLE_PORTAL_ADMINISTRATOR"));
-
+        RoleDto portalAdminRole = conversionUtil.convertObjectTo(
+                roleRepository.getByName("ROLE_PORTAL_ADMINISTRATOR"),RoleDto.class);
         UserDto userDto = UserDto.builder()
                 .name("name1")
                 .surname("surname1")
@@ -186,8 +186,8 @@ public class SecurityIT {
 
     @Test
     public void shouldLoginAfterRegistrationSuccessfully() throws Exception {
-        RoleDto portalAdminRole = conversionUtil.convertToDto(
-                roleRepository.getByName("ROLE_PORTAL_ADMINISTRATOR"));
+        RoleDto portalAdminRole = conversionUtil.convertObjectTo(
+                roleRepository.getByName("ROLE_PORTAL_ADMINISTRATOR"),RoleDto.class);
 
         UserDto userDto = UserDto.builder()
                 .name("name1")

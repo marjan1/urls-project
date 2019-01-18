@@ -1,7 +1,7 @@
 package com.eadvocate.rest.controller;
 
-import com.eadvocate.persistence.dao.RoleRepository;
-import com.eadvocate.persistence.dao.StatusRepository;
+import com.eadvocate.persistence.repo.RoleRepository;
+import com.eadvocate.persistence.repo.StatusRepository;
 import com.eadvocate.rest.dto.LoginUser;
 import com.eadvocate.rest.dto.RoleDto;
 import com.eadvocate.rest.dto.StatusDto;
@@ -83,8 +83,9 @@ public class UserControllerIT {
 
         authTokenContent = registrateAndLoginUser(1);
 
-        RoleDto portalAdminRoleForNewUser = conversionUtil.convertToDto(
-                roleRepository.getByName("ROLE_PORTAL_ADMINISTRATOR"));
+        RoleDto portalAdminRoleForNewUser = conversionUtil.convertObjectTo(
+                roleRepository.getByName("ROLE_PORTAL_ADMINISTRATOR"), RoleDto.class);
+
 
         UserDto newUserDto = UserDto.builder()
                 .name("name1")
@@ -146,8 +147,8 @@ public class UserControllerIT {
     public void shouldDeactivateAndActivateUser() throws Exception {
         authTokenContent = registrateAndLoginUser(3);
 
-        RoleDto roleAdvocate = conversionUtil.convertToDto(
-                roleRepository.getByName("ROLE_ADVOCATE"));
+        RoleDto roleAdvocate = conversionUtil.convertObjectTo(
+                roleRepository.getByName("ROLE_ADVOCATE"), RoleDto.class);
 
         UserDto newUserDto = UserDto.builder()
                 .name("name1")
@@ -193,9 +194,8 @@ public class UserControllerIT {
     @Ignore
     public void shouldAddNewUserSSuccessfullyAndGetPage() throws Exception {
 
-        RoleDto roleAdvocate = conversionUtil.convertToDto(
-                roleRepository.getByName("ROLE_ADVOCATE"));
-
+        RoleDto roleAdvocate = conversionUtil.convertObjectTo(
+                roleRepository.getByName("ROLE_ADVOCATE"), RoleDto.class);
         int sizeValue = 5;
 
         for (int i = 2; i < 20; i++) {
@@ -248,15 +248,15 @@ public class UserControllerIT {
     }
 
     private String registrateAndLoginUser(int temp) throws Exception {
-        RoleDto portalAdminRole = conversionUtil.convertToDto(
-                roleRepository.getByName("ROLE_PORTAL_ADMINISTRATOR"));
+        RoleDto portalAdminRole = conversionUtil.convertObjectTo(
+                roleRepository.getByName("ROLE_PORTAL_ADMINISTRATOR"), RoleDto.class);
 
         StatusDto statusDto = conversionUtil.convertObjectTo(statusRepository.getByName("Active"), StatusDto.class);
 
         UserDto userDto = UserDto.builder()
                 .name("name1")
                 .surname("surname1")
-                .email(temp+"c7@company1.com")
+                .email(temp + "c7@company1.com")
                 .password("passMarjan1!")
                 .matchingPassword("passMarjan1!")
                 .roleDto(portalAdminRole)

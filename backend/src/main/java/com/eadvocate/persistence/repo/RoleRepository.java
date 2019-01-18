@@ -1,4 +1,4 @@
-package com.eadvocate.persistence.dao;
+package com.eadvocate.persistence.repo;
 
 import com.eadvocate.persistence.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;

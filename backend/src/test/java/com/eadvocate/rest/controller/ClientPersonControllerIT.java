@@ -3,6 +3,7 @@ package com.eadvocate.rest.controller;
 import com.eadvocate.persistence.repo.RoleRepository;
 import com.eadvocate.persistence.repo.StatusRepository;
 import com.eadvocate.rest.dto.*;
+import com.eadvocate.util.CompanyType;
 import com.eadvocate.util.ConversionUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
@@ -31,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("dev")
-public class AdvocateCompanyControllerIT {
+public class ClientPersonControllerIT {
 
     private static final MediaType APPLICATION_JSON_UTF8 = new MediaType(MediaType.APPLICATION_JSON.getType(),
             MediaType.APPLICATION_JSON.getSubtype(), Charset.forName("utf8"));
@@ -54,7 +55,7 @@ public class AdvocateCompanyControllerIT {
     private MockMvc mvc;
 
     @Before
-    public void setup() throws Exception {
+    public void setup() {
         mvc = MockMvcBuilders
                 .webAppContextSetup(context)
                 .apply(springSecurity())
@@ -64,50 +65,9 @@ public class AdvocateCompanyControllerIT {
     }
 
     @Test
-    public void shouldAddNewAdvocateCompanySuccessfully() throws Exception {
+    public void shouldAddNewClientPersonSuccessfully() throws Exception {
 
         String authTokenContent = registrateAndLoginUser(1);
-
-        StatusDto status = conversionUtil.convertObjectTo(statusRepository.getByName("Active"), StatusDto.class);
-        AdvocateCompanyDto advocateCompanyDto = AdvocateCompanyDto.builder()
-                .name("ACompany")
-                .edbs("edbs")
-                .embs("embs")
-                .email("admin@company.com")
-                .address("1Street 34N")
-                .status(status)
-                .phone("12345")
-                .build();
-
-        MvcResult addedCompany = mvc.perform(post("/api/advocatecompany/add")
-                .header(AUTHORIZATION_HEADER, authTokenContent)
-                .contentType(APPLICATION_JSON_UTF8)
-                .content(objectMapper.writeValueAsString(advocateCompanyDto)))
-                .andExpect(status().isOk()).andReturn();
-
-        String savedCompanyAsString = addedCompany.getResponse().getContentAsString();
-
-        assertNotNull(savedCompanyAsString);
-
-        AdvocateCompanyDto savedCompany = objectMapper.readValue(savedCompanyAsString, AdvocateCompanyDto.class);
-
-        assertNotNull(savedCompany);
-
-        assertEquals(advocateCompanyDto.getEmail(), savedCompany.getEmail());
-        assertEquals(advocateCompanyDto.getEdbs(), savedCompany.getEdbs());
-        assertEquals(advocateCompanyDto.getPhone(), savedCompany.getPhone());
-        assertEquals(advocateCompanyDto.getEmbs(), savedCompany.getEmbs());
-        assertEquals(advocateCompanyDto.getName(), savedCompany.getName());
-        assertEquals(advocateCompanyDto.getAddress(), savedCompany.getAddress());
-        assertEquals(advocateCompanyDto.getStatus().getId(), savedCompany.getStatus().getId());
-
-    }
-
-
-    @Test
-    public void shouldAddNewAdvocateCompanyAndDeactivateAndActivateSuccessfully() throws Exception {
-
-        String authTokenContent = registrateAndLoginUser(2);
 
         StatusDto activeStatus = conversionUtil.convertObjectTo(statusRepository.getByName("Active"), StatusDto.class);
         AdvocateCompanyDto advocateCompanyDto = AdvocateCompanyDto.builder()
@@ -117,6 +77,7 @@ public class AdvocateCompanyControllerIT {
                 .email("admin@company.com")
                 .address("1Street 34N")
                 .status(activeStatus)
+                .type(CompanyType.OFFICE)
                 .phone("12345")
                 .build();
 
@@ -132,44 +93,39 @@ public class AdvocateCompanyControllerIT {
 
         AdvocateCompanyDto savedCompany = objectMapper.readValue(savedCompanyAsString, AdvocateCompanyDto.class);
 
-        assertNotNull(savedCompany);
+        ClientPersonDto clientPersonDto = new ClientPersonDto();
+
+        clientPersonDto.setName("clientPerson");
+        clientPersonDto.setEmail("test@email.com");
+        clientPersonDto.setAccountNumber("aCCn324");
+        clientPersonDto.setAdvocateCompany(savedCompany);
+        clientPersonDto.setPersonalId("personID");
 
 
-        MvcResult deactivationResult = mvc.perform(post("/api/advocatecompany/deactivate")
+        MvcResult addedClientPerson = mvc.perform(post("/api/clientperson/add")
                 .header(AUTHORIZATION_HEADER, authTokenContent)
                 .contentType(APPLICATION_JSON_UTF8)
-                .content(objectMapper.writeValueAsString(savedCompany)))
+                .content(objectMapper.writeValueAsString(clientPersonDto)))
                 .andExpect(status().isOk()).andReturn();
 
+        String savedClientPersonAsString = addedClientPerson.getResponse().getContentAsString();
 
-        String deactivationResultAsString = deactivationResult.getResponse().getContentAsString();
+        assertNotNull(savedClientPersonAsString);
 
-        assertNotNull(deactivationResultAsString);
+        ClientPersonDto savedClientPerson = objectMapper.readValue(savedClientPersonAsString, ClientPersonDto.class);
 
-        AdvocateCompanyDto deactivatedCompany = objectMapper.readValue(deactivationResultAsString, AdvocateCompanyDto.class);
+        assertNotNull(savedClientPerson);
 
-        assertNotNull(deactivatedCompany);
-        StatusDto deletedStatus = conversionUtil.convertObjectTo(statusRepository.getByName("Deleted"), StatusDto.class);
-        assertEquals(deletedStatus, deactivatedCompany.getStatus());
+        assertEquals(clientPersonDto.getEmail(), savedClientPerson.getEmail());
+        assertEquals(clientPersonDto.getEmbg(), savedClientPerson.getEmbg());
+        assertEquals(clientPersonDto.getPersonalId(), savedClientPerson.getPersonalId());
+        assertEquals(clientPersonDto.getName(), savedClientPerson.getName());
+        assertEquals(clientPersonDto.getAccountNumber(), savedClientPerson.getAccountNumber());
+        assertEquals(clientPersonDto.getAdvocateCompany().getId(), savedClientPerson.getAdvocateCompany().getId());
 
-        MvcResult activationResult = mvc.perform(post("/api/advocatecompany/activate")
-                .header(AUTHORIZATION_HEADER, authTokenContent)
-                .contentType(APPLICATION_JSON_UTF8)
-                .content(objectMapper.writeValueAsString(deactivatedCompany)))
-                .andExpect(status().isOk()).andReturn();
-
-
-        String activationResultAsString = activationResult.getResponse().getContentAsString();
-
-        assertNotNull(activationResultAsString);
-
-        AdvocateCompanyDto activeCompany = objectMapper.readValue(activationResultAsString, AdvocateCompanyDto.class);
-
-        assertNotNull(activeCompany);
-
-        assertEquals(activeStatus, activeCompany.getStatus());
 
     }
+
 
     private String registrateAndLoginUser(int temp) throws Exception {
         RoleDto portalAdminRole = conversionUtil.convertObjectTo(

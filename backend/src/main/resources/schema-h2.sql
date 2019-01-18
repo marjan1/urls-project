@@ -49,6 +49,7 @@ INSERT INTO `status` VALUES (1,'Active','Active status');
 INSERT INTO `status` VALUES (2,'Deleted','Deleted status');
 
 
+
 DROP TABLE IF EXISTS `advocate_company`;
 
 create TABLE `advocate_company` (
@@ -60,11 +61,51 @@ create TABLE `advocate_company` (
   `embs` varchar(100) DEFAULT NULL,
   `edbs` varchar(100) DEFAULT NULL,
   `license` varchar(255) DEFAULT NULL,
+  `type`  smallint (2) DEFAULT 1,
   `digital_signature` varchar(255) DEFAULT NULL,
   `status_id` SMALLINT(2) NOT NULL,
    PRIMARY KEY (`id`),
    foreign key (`status_id`) references status(id)
 );
+
+
+
+
+DROP TABLE IF EXISTS `client`;
+
+create TABLE `client` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `phone` varchar(45) DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
+  `account_number` varchar(255) NOT NULL,
+   `advocate_company_id` bigint(20) NOT NULL,
+   PRIMARY KEY (`id`),
+   foreign key (`advocate_company_id`) references advocate_company(id)
+);
+
+DROP TABLE IF EXISTS `client_company`;
+
+create TABLE `client_company` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `embs` varchar(7) NOT NULL,
+  `edb` varchar(13) DEFAULT NULL,
+  `manager_name` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  foreign key (`id`) references client(id)
+);
+
+DROP TABLE IF EXISTS `client_person`;
+
+create TABLE `client_person` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `personal_id` varchar(255) NOT NULL,
+  `embg` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  foreign key (`id`) references client(id)
+);
+
 
 DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;

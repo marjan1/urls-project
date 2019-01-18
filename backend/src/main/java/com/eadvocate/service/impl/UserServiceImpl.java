@@ -1,10 +1,10 @@
 package com.eadvocate.service.impl;
 
 
-import com.eadvocate.persistence.dao.StatusRepository;
-import com.eadvocate.persistence.dao.UserRepository;
 import com.eadvocate.persistence.model.Status;
 import com.eadvocate.persistence.model.User;
+import com.eadvocate.persistence.repo.StatusRepository;
+import com.eadvocate.persistence.repo.UserRepository;
 import com.eadvocate.rest.dto.UserDto;
 import com.eadvocate.service.UserService;
 import com.eadvocate.util.ConversionUtil;
@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         user.setStatus(deleteStatus);
         User savedUser = userRepository.save(user);
 
-        return conversionUtil.convertToDto(savedUser);
+        return conversionUtil.convertObjectTo(savedUser, UserDto.class);
     }
 
     /**
@@ -90,7 +90,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         user.setStatus(activeStatus);
         User savedUser = userRepository.save(user);
 
-        return conversionUtil.convertToDto(savedUser);
+        return conversionUtil.convertObjectTo(savedUser, UserDto.class);
     }
 
     /**
@@ -102,6 +102,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
      */
     @Override
     public Page<UserDto> findAll(int pageNumber, int size) {
+        log.info("Get page of users with page number {} and size {}", pageNumber, size);
         Pageable page = PageRequest.of(pageNumber, size, Sort.by("name"));
 
         List<UserDto> dtos = userRepository.findAll(page).stream().map(user -> conversionUtil.convertObjectTo(user, UserDto.class))
@@ -120,7 +121,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
      */
     @Override
     public boolean checkEmailExistence(String email) {
-
+    log.info("Check existence of email {}",email);
         if (userRepository.findByEmail(email).isPresent()) {
             return true;
         }
@@ -128,7 +129,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
 
     public List<UserDto> findAll() {
-        return userRepository.findAll().stream().map(user -> conversionUtil.convertToDto(user))
+        return userRepository.findAll().stream().map(user -> conversionUtil.convertObjectTo(user, UserDto.class))
                 .collect(Collectors.toList());
     }
 
@@ -152,8 +153,8 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     @Override
     public UserDto findOne(String username) throws UsernameNotFoundException {
         log.info("Get user by username = {}", username);
-        return conversionUtil.convertToDto(userRepository.findByEmail(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found by username")));
+        return conversionUtil.convertObjectTo(userRepository.findByEmail(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found by username")), UserDto.class);
 
     }
 
@@ -166,8 +167,8 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     @Override
     public UserDto findById(Long id) throws UsernameNotFoundException {
 
-        return conversionUtil.convertToDto(userRepository.findById(id)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found by id")));
+        return conversionUtil.convertObjectTo(userRepository.findById(id)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found by id")), UserDto.class);
 
     }
 

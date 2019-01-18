@@ -1,9 +1,9 @@
 package com.eadvocate.service;
 
-import com.eadvocate.persistence.dao.AdvocateCompanyRepository;
-import com.eadvocate.persistence.dao.StatusRepository;
 import com.eadvocate.persistence.model.AdvocateCompany;
 import com.eadvocate.persistence.model.Status;
+import com.eadvocate.persistence.repo.AdvocateCompanyRepository;
+import com.eadvocate.persistence.repo.StatusRepository;
 import com.eadvocate.rest.dto.AdvocateCompanyDto;
 import com.eadvocate.util.ConversionUtil;
 import lombok.AllArgsConstructor;
@@ -36,6 +36,7 @@ public class AdvocateCompanyService {
      * @return AdvocateCompanyDto added object
      */
     public AdvocateCompanyDto addAdvocateCompany(AdvocateCompanyDto advocateCompanyDto){
+        log.info("Adding new advocate company with name {}",advocateCompanyDto.getName());
         AdvocateCompany advocateCompany = conversionUtil.convertObjectTo(advocateCompanyDto,AdvocateCompany.class);
         advocateCompany = advocateCompanyRepository.save(advocateCompany);
         return  conversionUtil.convertObjectTo(advocateCompany,AdvocateCompanyDto.class);
@@ -48,6 +49,7 @@ public class AdvocateCompanyService {
      * @return the page
      */
     public Page<AdvocateCompanyDto> getPage(int pageNumber, int size) {
+        log.info("Get page of advocate companies with page number {} and size {}", pageNumber, size);
         Pageable page = PageRequest.of(pageNumber, size, Sort.by("name"));
 
         List<AdvocateCompanyDto> dtos = advocateCompanyRepository.findAll(page).stream()

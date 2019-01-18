@@ -2,7 +2,6 @@ package com.eadvocate.rest.controller;
 
 import com.eadvocate.rest.dto.AdvocateCompanyDto;
 import com.eadvocate.service.AdvocateCompanyService;
-import com.eadvocate.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
@@ -22,14 +21,13 @@ import javax.validation.constraints.NotNull;
 @Log4j2
 public class AdvocateCompanyController {
 
-    private UserService userService;
-
     private AdvocateCompanyService advocateCompanyService;
 
     /**
      * Get page of advocate companies for appropriate page number and size.
+     *
      * @param pageNumber Integer
-     * @param size Integer
+     * @param size       Integer
      * @return Page of users
      */
     @GetMapping(value = "/page")
@@ -41,6 +39,7 @@ public class AdvocateCompanyController {
 
     /**
      * Change the status of advocate company to active.
+     *
      * @param advocateCompanyDto AdvocateCompanyDto
      * @return Changed advocateCompanyDto
      */
@@ -53,6 +52,7 @@ public class AdvocateCompanyController {
 
     /**
      * Change the status of advocate company to deactivate.
+     *
      * @param advocateCompanyDto AdvocateCompanyDto
      * @return Changed advocateCompanyDto
      */
@@ -64,6 +64,7 @@ public class AdvocateCompanyController {
 
     /**
      * Add new advocate company in the system.
+     *
      * @param advocateCompanyDto Object with data of the new advocate company
      * @return object with added advocate company data
      */
@@ -72,10 +73,6 @@ public class AdvocateCompanyController {
         log.info("Request for adding of advocate company with name {} received", advocateCompanyDto.getName());
         return advocateCompanyService.addAdvocateCompany(advocateCompanyDto);
     }
-
-
-
-
 
 
 //    @GetMapping(value = "/advocates")
