@@ -3,7 +3,7 @@ import {MatTableDataSource} from '@angular/material';
 import {User} from './user.model';
 
 import {Router} from '@angular/router';
-import {UserService} from "../service/user.service";
+import {UserService} from "../_service/user.service";
 
 @Component({
   selector: 'app-root',

@@ -206,7 +206,7 @@ CREATE TABLE `user` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
-
+INSERT INTO `user` VALUES (1,'m@d.com','supAdmin','adminovski','$2a$10$rtYIahq9Ga2wZODMj2hGUeZCX4rNXOfcR46hJaXhvZ9KP8f7SnRTS','23123',1,1,NULL );
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
@@ -227,6 +227,8 @@ CREATE TABLE `users_roles` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+
+insert into `users_roles` VALUES (3,1);
 --
 -- Dumping data for table `users_roles`
 --
