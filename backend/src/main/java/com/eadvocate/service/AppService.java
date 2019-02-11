@@ -1,6 +1,8 @@
 package com.eadvocate.service;
 
+import com.eadvocate.persistence.repo.RoleRepository;
 import com.eadvocate.persistence.repo.StatusRepository;
+import com.eadvocate.persistence.repo.UserRepository;
 import com.eadvocate.rest.dto.StatusDto;
 import com.eadvocate.util.ConversionUtil;
 import lombok.AllArgsConstructor;
@@ -22,8 +24,23 @@ public class AppService {
 
     private StatusRepository statusRepository;
     private ConversionUtil conversionUtil;
+    private UserRepository userRepository;
+    private RoleRepository roleRepository;
 
     public List<StatusDto> getAllStatuses() {
+
+//        Status status1 = statusRepository.getByName("Active");
+//        List<Role> roles =roleRepository.findAll();
+//
+//        User user = new User();
+//        user.setStatus(status1);
+//        user.setRoles(new HashSet<>(roles));
+//        user.setEmail("q@w.com");
+//        user.setPassword("$2a$10$rtYIahq9Ga2wZODMj2hGUeZCX4rNXOfcR46hJaXhvZ9KP8f7SnRTS");
+//        user.setName("Peroo");
+//        user.setSurname("perovski");
+//        user.setAccountGroupLevel((short)1);
+//        userRepository.save(user);
 
         return statusRepository.findAll().stream()
                 .map(status -> conversionUtil.convertObjectTo(status, StatusDto.class))

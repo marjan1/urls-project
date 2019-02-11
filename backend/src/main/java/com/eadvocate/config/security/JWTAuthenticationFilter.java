@@ -8,13 +8,17 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.eadvocate.util.Constants.*;
 
@@ -78,11 +82,19 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             Authentication authResult) throws IOException {
 
         String username = ((org.springframework.security.core.userdetails.User) authResult.getPrincipal()).getUsername();
+        Collection<GrantedAuthority> grantedAuthorities = ((org.springframework.security.core.userdetails.User) authResult.getPrincipal()).getAuthorities();
+        Map<String,Object> grantedAuthorityMap = new HashMap<>();
+        grantedAuthorityMap.put("roles", grantedAuthorities);
+                //grantedAuthorities.stream().forEach()
+
+//        .collect(
+//                Collectors.toMap("dd", GrantedAuthority::getAuthority));
         String token = Jwts
                 .builder()
                 .setSubject(username)
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(SignatureAlgorithm.HS512, SECRET)
+                .addClaims(grantedAuthorityMap)
                 .compact();
         String bearerToken = TOKEN_PREFIX + token;
         response.getWriter().write(bearerToken);

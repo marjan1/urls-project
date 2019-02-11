@@ -6,11 +6,13 @@ import {
   MatDialogModule,
   MatInputModule,
   MatTableModule,
-  MatToolbarModule
+  MatToolbarModule,
 } from '@angular/material';
 
 @NgModule({
-  imports: [CommonModule, MatToolbarModule, MatButtonModule, MatCardModule, MatInputModule, MatDialogModule, MatTableModule],
-  exports: [CommonModule, MatToolbarModule, MatButtonModule, MatCardModule, MatInputModule, MatDialogModule, MatTableModule],
+  imports: [CommonModule, MatToolbarModule, MatButtonModule, MatCardModule,
+    MatInputModule, MatDialogModule, MatTableModule],
+  exports: [CommonModule, MatToolbarModule, MatButtonModule, MatCardModule,
+    MatInputModule, MatDialogModule, MatTableModule],
 })
 export class CustomMaterialModule { }

@@ -50,6 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Autowired
     public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication().withUser("mar@d.com").password("jan").roles("ADVOCATE_COMPANY_ADMINISTRATOR");
         auth.userDetailsService(userServiceImpl)
                 .passwordEncoder(encoder());
     }
@@ -66,7 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues())
                 .and().csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/signup*", "/h2-console/**", "/h2-console*").permitAll()
+                .antMatchers("/login","/api/signup*", "/h2-console/**", "/h2-console*").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
@@ -88,6 +89,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public BCryptPasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
     }
+
+//    public static void main(String[] args) {
+//        BCryptPasswordEncoder bCryptPasswordEncoder =  new BCryptPasswordEncoder();
+//
+//       String encoded =  bCryptPasswordEncoder.encode("1");
+//        System.out.println("encoded "+encoded);
+//    }
 
 
 }

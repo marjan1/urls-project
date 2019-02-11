@@ -20,6 +20,10 @@ import {AdvocateComponent} from './advocate/advocate.component';
 import {ApprenticeComponent} from './apprentice/apprentice.component';
 import {HeaderComponent} from './header/header.component';
 import {AppService} from "./_service/app.service";
+import {ErrorPageComponent} from "./error-page/error-page.component";
+import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
+import {AuthGuard} from "./_service/auth-guard.service";
+import {SignupComponent} from './auth/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +35,10 @@ import {AppService} from "./_service/app.service";
     CompanyAdminComponent,
     AdvocateComponent,
     ApprenticeComponent,
-    HeaderComponent],
+    HeaderComponent,
+  ErrorPageComponent,
+  PageNotFoundComponent,
+  SignupComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -41,6 +48,7 @@ import {AppService} from "./_service/app.service";
     AppRoutingModule
   ],
   providers: [ErrorDialogComponent, UserService, AuthService, TokenStorage, TokenStorage,
+    AuthGuard,
     AppService,
     {provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,
