@@ -3,6 +3,7 @@ package com.eadvocate.service;
 import com.eadvocate.persistence.repo.RoleRepository;
 import com.eadvocate.persistence.repo.StatusRepository;
 import com.eadvocate.persistence.repo.UserRepository;
+import com.eadvocate.rest.dto.RoleDto;
 import com.eadvocate.rest.dto.StatusDto;
 import com.eadvocate.util.ConversionUtil;
 import lombok.AllArgsConstructor;
@@ -44,6 +45,12 @@ public class AppService {
 
         return statusRepository.findAll().stream()
                 .map(status -> conversionUtil.convertObjectTo(status, StatusDto.class))
+                .collect(Collectors.toList());
+    }
+
+    public List<RoleDto> getAllRoles(){
+        return roleRepository.findAll().stream()
+                .map(role -> conversionUtil.convertObjectTo(role, RoleDto.class))
                 .collect(Collectors.toList());
     }
 

@@ -1,4 +1,4 @@
-export class CompanyType {
+export class Role {
 
   id: number;
   name: string;

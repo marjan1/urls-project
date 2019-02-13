@@ -3,6 +3,7 @@ import {Observable} from 'rxjs/Observable';
 import {HttpClient} from '@angular/common/http';
 import {Status} from "../_model/status.model";
 import {TokenStorage} from "../_shared/token.storage";
+import {Role} from "../_model/role.model";
 
 @Injectable()
 export class AppService {
@@ -13,6 +14,10 @@ export class AppService {
 
   public getStatuses(): Observable<Status[]> {
     return this.http.get<Status[]>(this.baseUrl + '/app/statuses');
+  }
+
+  public getRoles(): Observable<Role[]> {
+    return this.http.get<Status[]>(this.baseUrl + '/app/roles');
   }
 
   public isLoggedIn():boolean{

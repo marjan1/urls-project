@@ -1,7 +1,7 @@
 import {CompanyType} from "./company-type.model";
 import {Status} from "./status.model";
 
-export interface AdvocateCompany {
+export class AdvocateCompany {
 
   id: number;
   name: string;

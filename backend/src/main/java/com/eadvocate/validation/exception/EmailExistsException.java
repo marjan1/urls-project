@@ -1,10 +1,11 @@
 package com.eadvocate.validation.exception;
 
-@SuppressWarnings("serial")
-public class EmailExistsException extends Throwable {
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-    public EmailExistsException(final String message) {
-        super(message);
-    }
+@SuppressWarnings("serial")
+@ResponseStatus(value = HttpStatus.BAD_REQUEST, reason="Email already exist !!")
+public class EmailExistsException extends RuntimeException {
+
 
 }

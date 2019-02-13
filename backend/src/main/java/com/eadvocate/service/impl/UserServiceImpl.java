@@ -8,6 +8,7 @@ import com.eadvocate.persistence.repo.UserRepository;
 import com.eadvocate.rest.dto.UserDto;
 import com.eadvocate.service.UserService;
 import com.eadvocate.util.ConversionUtil;
+import com.eadvocate.validation.exception.EmailExistsException;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.*;
@@ -121,7 +122,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
      */
     @Override
     public boolean checkEmailExistence(String email) {
-    log.info("Check existence of email {}",email);
+        log.info("Check existence of email {}", email);
         if (userRepository.findByEmail(email).isPresent()) {
             return true;
         }
@@ -181,6 +182,10 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     @Override
     public UserDto addNewUser(UserDto userDto) {
         log.info("Add new user with {}", userDto);
+        if (checkEmailExistence(userDto.getEmail())) {
+            log.info("Email {} already exist for sign up new user ", userDto.getEmail());
+            throw new EmailExistsException();
+        }
         userDto.setPassword(bcryptEncoder.encode(userDto.getPassword()));
         User user = conversionUtil.convertObjectTo(userDto, User.class);
         User save1 = this.userRepository.save(user);

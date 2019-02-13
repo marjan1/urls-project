@@ -1,4 +1,4 @@
-export interface LoggedUser {
+export class LoggedUser {
 
   sub: string;
   exp: string;

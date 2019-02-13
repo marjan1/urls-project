@@ -2,7 +2,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
-import {UserComponent} from "./user/user.component";
 import {ErrorDialogComponent} from "./_shared/error-dialog.component";
 import {LoginComponent} from "./login/login.component";
 import {AuthService} from "./_service/auth.service";
@@ -11,7 +10,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {Interceptor} from "./_shared/inteceptor";
 import {UserService} from "./_service/user.service";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CustomMaterialModule} from "./_shared/material.module";
 import {AppRoutingModule} from "./_shared/app.routing.module";
 import {PortalAdminComponent} from './portal-admin/portal-admin.component';
@@ -23,12 +22,12 @@ import {AppService} from "./_service/app.service";
 import {ErrorPageComponent} from "./error-page/error-page.component";
 import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
 import {AuthGuard} from "./_service/auth-guard.service";
-import {SignupComponent} from './auth/signup/signup.component';
+import {SignupComponent} from "./auth/signup/signup.component";
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserComponent,
     LoginComponent,
     ErrorDialogComponent,
     PortalAdminComponent,
@@ -36,23 +35,26 @@ import {SignupComponent} from './auth/signup/signup.component';
     AdvocateComponent,
     ApprenticeComponent,
     HeaderComponent,
-  ErrorPageComponent,
-  PageNotFoundComponent,
-  SignupComponent],
+    ErrorPageComponent,
+    PageNotFoundComponent,
+    SignupComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
     CustomMaterialModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule
   ],
   providers: [ErrorDialogComponent, UserService, AuthService, TokenStorage, TokenStorage,
     AuthGuard,
     AppService,
-    {provide: HTTP_INTERCEPTORS,
+    {
+      provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,
-      multi : true}
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

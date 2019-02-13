@@ -8,7 +8,6 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -36,16 +35,7 @@ public class UserController {
         return userService.findAll(pageNumber, size);
     }
 
-    /**
-     * Check if email already existing in db.
-     * @param email String
-     * @return true or false if email exist
-     */
-    @PostMapping(value = "/emailcheck")
-    public boolean checkEmailExistence(@RequestBody @ValidEmail String email) {
-        log.info("Request for getting if email present {}", email);
-        return userService.checkEmailExistence(email);
-    }
+
 
     /**
      * Change the status of user found by email String to Active.
@@ -69,16 +59,7 @@ public class UserController {
         return userService.deleteUser(email);
     }
 
-    /**
-     * Add new user in the system.
-     * @param userDto Object with data of the new user
-     * @return object with added user data
-     */
-    @PostMapping(value = "/add")
-    public UserDto addNewUser(@RequestBody @Valid UserDto userDto) {
-        log.info("Request for signup new user with data {} received", userDto);
-        return userService.addNewUser(userDto);
-    }
+
 
 
 
