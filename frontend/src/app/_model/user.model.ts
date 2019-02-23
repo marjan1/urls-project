@@ -1,5 +1,6 @@
 import {Role} from "./role.model";
 import {Status} from "./status.model";
+import {AdvocateCompany} from "./advocate-company.model";
 
 export class User {
 
@@ -13,6 +14,7 @@ export class User {
   phone: string;
   roleDtos: Role[];
   statusDto: Status;
+  advocateCompany: AdvocateCompany;
   accountGroupLevel: number;
 
 }

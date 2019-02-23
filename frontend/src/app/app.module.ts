@@ -23,6 +23,13 @@ import {ErrorPageComponent} from "./error-page/error-page.component";
 import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
 import {AuthGuard} from "./_service/auth-guard.service";
 import {SignupComponent} from "./auth/signup/signup.component";
+import {NewCompanyComponent} from './portal-admin/new-company/new-company.component';
+import {CompaniesComponent} from './portal-admin/companies/companies.component';
+import {AdminsComponent} from './portal-admin/admins/admins.component';
+import {PaHeaderComponent} from './portal-admin/pa-header/pa-header.component';
+import {CompanyService} from "./_service/company.service";
+
+;
 
 
 @NgModule({
@@ -37,7 +44,11 @@ import {SignupComponent} from "./auth/signup/signup.component";
     HeaderComponent,
     ErrorPageComponent,
     PageNotFoundComponent,
-    SignupComponent],
+    SignupComponent,
+    NewCompanyComponent,
+    CompaniesComponent,
+    AdminsComponent,
+    PaHeaderComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -50,6 +61,7 @@ import {SignupComponent} from "./auth/signup/signup.component";
   providers: [ErrorDialogComponent, UserService, AuthService, TokenStorage, TokenStorage,
     AuthGuard,
     AppService,
+    CompanyService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,

@@ -48,6 +48,9 @@ public class UserDto {
     @NotNull
     private StatusDto statusDto;
 
+    private AdvocateCompanyDto advocateCompany;
+
+
     @NotNull
     private Short accountGroupLevel;
 

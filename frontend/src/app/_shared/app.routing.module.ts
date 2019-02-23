@@ -9,10 +9,17 @@ import {ErrorPageComponent} from "../error-page/error-page.component";
 import {PageNotFoundComponent} from "../page-not-found/page-not-found.component";
 import {AuthGuard} from "../_service/auth-guard.service";
 import {SignupComponent} from "../auth/signup/signup.component";
+import {NewCompanyComponent} from "../portal-admin/new-company/new-company.component";
+import {CompaniesComponent} from "../portal-admin/companies/companies.component";
+import {AdminsComponent} from "../portal-admin/admins/admins.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/', pathMatch: 'full'},
-  {path: 'portal-admin', canActivate: [AuthGuard], component: PortalAdminComponent,},
+  {path: 'portal-admin', canActivate: [AuthGuard], component: PortalAdminComponent, children:[
+      { path: 'new', component: NewCompanyComponent },
+      { path: '', component: CompaniesComponent },
+      { path: 'admins', component: AdminsComponent }
+    ]},
   {path: 'company-admin', component: CompanyAdminComponent},
   {path: 'advocate', component: AdvocateComponent},
   {path: 'apprentice', component: ApprenticeComponent},

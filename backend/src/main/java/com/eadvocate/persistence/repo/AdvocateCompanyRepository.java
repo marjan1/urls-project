@@ -3,6 +3,8 @@ package com.eadvocate.persistence.repo;
 import com.eadvocate.persistence.model.AdvocateCompany;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 /**
  * Spring data repository for AdvocateCompany model.
  */
@@ -12,12 +14,14 @@ public interface AdvocateCompanyRepository extends JpaRepository<AdvocateCompany
      * @param name String
      * @return AdvocateCompany
      */
-    AdvocateCompany getByName(String name);
+    Optional<AdvocateCompany> getByName(String name);
 
     /**
      * Find AdvocateCompany by email
      * @param email String
      * @return AdvocateCompany
      */
-    AdvocateCompany getByEmail(String email);
+    Optional<AdvocateCompany> getByEmail(String email);
+
+
 }

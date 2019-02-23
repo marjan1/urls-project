@@ -4,17 +4,28 @@ import {
   MatButtonModule,
   MatCardModule,
   MatDialogModule,
+  MatDividerModule,
   MatIconModule,
   MatInputModule,
+  MatMenuModule,
+  MatPaginatorModule,
+  MatProgressSpinnerModule,
   MatSelectModule,
+  MatSnackBarModule,
+  MatSortModule,
   MatTableModule,
-  MatToolbarModule,
+  MatToolbarModule
 } from '@angular/material';
 
 @NgModule({
-  imports: [CommonModule, MatToolbarModule, MatButtonModule, MatCardModule,
-    MatInputModule, MatDialogModule, MatTableModule, MatIconModule, MatSelectModule],
-  exports: [CommonModule, MatToolbarModule, MatButtonModule, MatCardModule,
-    MatInputModule, MatDialogModule, MatTableModule, MatIconModule, MatSelectModule],
+  imports: [CommonModule, MatToolbarModule, MatButtonModule, MatCardModule, MatMenuModule, MatDividerModule,
+    MatInputModule, MatDialogModule, MatTableModule, MatIconModule, MatSelectModule, MatSnackBarModule,
+  MatPaginatorModule,MatSortModule,
+    MatProgressSpinnerModule],
+  exports: [CommonModule, MatToolbarModule, MatButtonModule, MatCardModule, MatMenuModule, MatDividerModule,
+    MatInputModule, MatDialogModule, MatTableModule, MatIconModule, MatSelectModule, MatSnackBarModule,
+    MatPaginatorModule,MatSortModule,
+    MatProgressSpinnerModule],
 })
-export class CustomMaterialModule { }
+export class CustomMaterialModule {
+}

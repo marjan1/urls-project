@@ -19,7 +19,7 @@ export class UserService {
 
   signUpNewUser(user: User): Observable<User> {
     console.log('signup nw user  ', user);
-    return this.http.post<User>(this.baseUrl + '/app/add', user);
+    return this.http.post<User>(this.baseUrl + '/app/add', [user, user]);
   }
 
 }

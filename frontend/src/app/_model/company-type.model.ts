@@ -1,6 +1,4 @@
-export class CompanyType {
-
-  id: number;
-  name: string;
-
+export enum CompanyType {
+  OFFICE  = 0,
+  SOLO = 1
 }

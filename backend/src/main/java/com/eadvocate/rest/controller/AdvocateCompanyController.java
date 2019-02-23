@@ -1,6 +1,7 @@
 package com.eadvocate.rest.controller;
 
 import com.eadvocate.rest.dto.AdvocateCompanyDto;
+import com.eadvocate.rest.dto.CompanyUserDto;
 import com.eadvocate.service.AdvocateCompanyService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -31,9 +32,13 @@ public class AdvocateCompanyController {
      * @return Page of users
      */
     @GetMapping(value = "/page")
-    public Page<AdvocateCompanyDto> listUser(@RequestParam @NotNull Integer pageNumber, @RequestParam @NotNull Integer size) {
-        log.info("Request for getting all advocate companies received for page number {} with size {}", pageNumber, size);
-        return advocateCompanyService.getPage(pageNumber, size);
+    public Page<AdvocateCompanyDto> listUser(@RequestParam @NotNull Integer pageNumber,
+                                             @RequestParam @NotNull Integer size,
+                                             @RequestParam String filter,
+                                             @RequestParam(defaultValue = "asc") String sortOrder) {
+        log.info("Request for getting all advocate companies received for page number {}, size {}, filter {} and sort order {} ",
+                pageNumber, size, filter, sortOrder);
+        return advocateCompanyService.getPage(pageNumber, size, sortOrder, filter);
     }
 
 
@@ -72,6 +77,12 @@ public class AdvocateCompanyController {
     public AdvocateCompanyDto addAdvocateCompany(@RequestBody @Valid AdvocateCompanyDto advocateCompanyDto) {
         log.info("Request for adding of advocate company with name {} received", advocateCompanyDto.getName());
         return advocateCompanyService.add(advocateCompanyDto);
+    }
+
+    @PostMapping(value = "/addwithadmin")
+    public AdvocateCompanyDto addAdvocateCompanyWithAdmin(@RequestBody @Valid CompanyUserDto companyUserDto) {
+        log.info("Request for adding of advocate company with name {} received", companyUserDto.getAdvocateCompany().getName());
+        return advocateCompanyService.addCompanyWithAdmin(companyUserDto.getAdvocateCompany(), companyUserDto.getUser());
     }
 
 

@@ -2,13 +2,18 @@ package com.eadvocate.service;
 
 import com.eadvocate.persistence.model.AdvocateCompany;
 import com.eadvocate.persistence.model.Status;
+import com.eadvocate.persistence.model.User;
 import com.eadvocate.persistence.repo.AdvocateCompanyRepository;
 import com.eadvocate.persistence.repo.StatusRepository;
+import com.eadvocate.persistence.repo.UserRepository;
 import com.eadvocate.rest.dto.AdvocateCompanyDto;
+import com.eadvocate.rest.dto.UserDto;
 import com.eadvocate.util.ConversionUtil;
+import com.eadvocate.validation.exception.CompanyNameExistsException;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -28,7 +33,24 @@ public class AdvocateCompanyService {
 
     private StatusRepository statusRepository;
 
+    private UserRepository userRepository;
+
     private ConversionUtil conversionUtil;
+
+    private BCryptPasswordEncoder bcryptEncoder;
+
+
+    public AdvocateCompanyDto addCompanyWithAdmin(AdvocateCompanyDto advocateCompanyDto,
+                                                  UserDto userDto) {
+        log.info("Adding new advocate company with name {}", advocateCompanyDto.getName());
+        AdvocateCompany advocateCompany = advocateCompanyRepository
+                .save(conversionUtil.convertObjectTo(advocateCompanyDto, AdvocateCompany.class));
+        userDto.setPassword(bcryptEncoder.encode(userDto.getPassword()));
+        User user = conversionUtil.convertObjectTo(userDto, User.class);
+        user.setAdvocateCompany(advocateCompany);
+        userRepository.save(user);
+        return conversionUtil.convertObjectTo(advocateCompany, AdvocateCompanyDto.class);
+    }
 
     /**
      * Method for adding new Advocate company.
@@ -37,10 +59,24 @@ public class AdvocateCompanyService {
      * @return AdvocateCompanyDto added object
      */
     public AdvocateCompanyDto add(AdvocateCompanyDto advocateCompanyDto) {
+        if (checkCompanyNameExistence(advocateCompanyDto.getName(), advocateCompanyDto.getId())) {
+            log.info("Company with name {} already exist ", advocateCompanyDto.getName());
+            throw new CompanyNameExistsException();
+        }
         log.info("Adding new advocate company with name {}", advocateCompanyDto.getName());
         AdvocateCompany advocateCompany = advocateCompanyRepository
                 .save(conversionUtil.convertObjectTo(advocateCompanyDto, AdvocateCompany.class));
         return conversionUtil.convertObjectTo(advocateCompany, AdvocateCompanyDto.class);
+    }
+
+    private boolean checkCompanyNameExistence(String name, long id) {
+        log.info("Check existence of company name {}", name);
+        if (advocateCompanyRepository.getByName(name).isPresent()) {
+            if (advocateCompanyRepository.getByName(name).get().getId() != id) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -50,15 +86,20 @@ public class AdvocateCompanyService {
      * @param size       of the page
      * @return the page
      */
-    public Page<AdvocateCompanyDto> getPage(int pageNumber, int size) {
+    public Page<AdvocateCompanyDto> getPage(int pageNumber, int size, String sortOrder, String filter) {
         log.info("Get page of advocate companies with page number {} and size {}", pageNumber, size);
-        Pageable page = PageRequest.of(pageNumber, size, Sort.by("name"));
+        Sort sort = sortOrder.equals("asc") ? Sort.by(Sort.Order.asc("name")) : Sort.by(Sort.Order.desc("name"));
 
-        List<AdvocateCompanyDto> dtos = advocateCompanyRepository.findAll(page).stream()
+        Pageable page = PageRequest.of(pageNumber, size, sort);
+
+        Page<AdvocateCompany> rezult = advocateCompanyRepository.findAll(page);
+
+        List<AdvocateCompanyDto> dtos = rezult.stream()
                 .map(advocateCompany -> conversionUtil.convertObjectTo(advocateCompany, AdvocateCompanyDto.class))
                 .collect(Collectors.toList());
 
-        Page<AdvocateCompanyDto> userDtoPage = new PageImpl<>(dtos, page, size);
+        Page<AdvocateCompanyDto> userDtoPage = new PageImpl<>(dtos, page, rezult.getTotalElements());
+
         return userDtoPage;
     }
 

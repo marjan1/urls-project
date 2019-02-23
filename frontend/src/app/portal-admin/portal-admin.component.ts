@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AppService} from "../_service/app.service";
 import {MatTableDataSource} from "@angular/material";
 import {Status} from "../_model/status.model";
+import {CompanyType} from "../_model/company-type.model";
 
 @Component({
   selector: 'app-portal-admin',
@@ -12,6 +13,7 @@ export class PortalAdminComponent implements OnInit {
 
   displayedColumns = ['id', 'name', 'description'];
   dataSource = new MatTableDataSource<Status>();
+  companyTypes:CompanyType;
 
   constructor(private appService : AppService) { }
 
