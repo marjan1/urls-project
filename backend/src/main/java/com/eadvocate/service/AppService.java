@@ -31,7 +31,7 @@ public class AppService {
     public List<StatusDto> getAllStatuses() {
 
 //        Status status1 = statusRepository.getByName("Active");
-//        List<Role> roles =roleRepository.findAll();
+//        List<Role> roles =roleRepository.findAllAdmins();
 //
 //        User user = new User();
 //        user.setStatus(status1);

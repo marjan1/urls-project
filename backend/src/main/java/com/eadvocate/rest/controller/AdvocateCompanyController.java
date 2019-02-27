@@ -89,13 +89,13 @@ public class AdvocateCompanyController {
 //    @GetMapping(value = "/advocates")
 //    @PreAuthorize("hasRole('ROLE_ADVOCATE')")
 //    public List<UserDto> listAdvocates() {
-//        return userService.findAll();
+//        return userService.findAllAdmins();
 //    }
 //
 //    @GetMapping(value = "/apprentices")
 //    @PreAuthorize("hasRole('ROLE_APPRENTICE')")
 //    public List<UserDto> listApprentices() {
-//        return userService.findAll();
+//        return userService.findAllAdmins();
 //    }
 
 

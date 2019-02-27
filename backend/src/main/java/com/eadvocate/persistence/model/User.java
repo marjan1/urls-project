@@ -1,6 +1,7 @@
 package com.eadvocate.persistence.model;
 
 import lombok.Data;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ import java.util.Set;
 @Entity
 @Data
 @Table(name = "user")
+@DynamicUpdate
 public class User {
 
     @Id

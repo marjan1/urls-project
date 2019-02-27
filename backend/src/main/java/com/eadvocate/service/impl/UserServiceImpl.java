@@ -1,10 +1,13 @@
 package com.eadvocate.service.impl;
 
 
+import com.eadvocate.persistence.model.Role;
 import com.eadvocate.persistence.model.Status;
 import com.eadvocate.persistence.model.User;
+import com.eadvocate.persistence.repo.RoleRepository;
 import com.eadvocate.persistence.repo.StatusRepository;
 import com.eadvocate.persistence.repo.UserRepository;
+import com.eadvocate.rest.dto.CUserDto;
 import com.eadvocate.rest.dto.UserDto;
 import com.eadvocate.service.UserService;
 import com.eadvocate.util.ConversionUtil;
@@ -43,6 +46,8 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     private ConversionUtil conversionUtil;
 
     private StatusRepository statusRepository;
+
+    private RoleRepository roleRepository;
 
     /**
      * Method for searching user by username for database and if found populate UserDetails
@@ -102,14 +107,26 @@ public class UserServiceImpl implements UserDetailsService, UserService {
      * @return page with the users
      */
     @Override
-    public Page<UserDto> findAll(int pageNumber, int size) {
+    public Page<CUserDto> findAllAdmins(int pageNumber, int size, String sortOrder, String filter) {
         log.info("Get page of users with page number {} and size {}", pageNumber, size);
-        Pageable page = PageRequest.of(pageNumber, size, Sort.by("name"));
 
-        List<UserDto> dtos = userRepository.findAll(page).stream().map(user -> conversionUtil.convertObjectTo(user, UserDto.class))
+        Sort sort = sortOrder.equals("asc") ? Sort.by(Sort.Order.asc("name")) :
+                Sort.by(Sort.Order.desc("name"));
+
+        Pageable page = PageRequest.of(pageNumber, size, sort);
+
+        Role companyAdminRole = roleRepository.getByName("ROLE_ADVOCATE_COMPANY_ADMINISTRATOR");
+
+//        ArrayList<Role> roles = new ArrayList<>();
+//        roles.add(companyAdminRole);
+        Page<User> result = userRepository.findAllByRoles(page, companyAdminRole);
+
+
+        List<CUserDto> dtos = result.stream()
+                .map(user -> conversionUtil.convertObjectTo(user, CUserDto.class))
                 .collect(Collectors.toList());
 
-        Page<UserDto> userDtoPage = new PageImpl<>(dtos, page, size);
+        Page<CUserDto> userDtoPage = new PageImpl<>(dtos, page, result.getTotalElements());
         return userDtoPage;
     }
 
@@ -123,13 +140,17 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     @Override
     public boolean checkEmailExistence(String email) {
         log.info("Check existence of email {}", email);
-        if (userRepository.findByEmail(email).isPresent()) {
-            return true;
-        }
-        return false;
+        return userRepository.findByEmail(email).isPresent();
+
     }
 
-    public List<UserDto> findAll() {
+    @Override
+    public boolean checkEmailExistenceForUser(Long id, String email) {
+        log.info("Check existence of email {}", email);
+        return userRepository.findByEmailAndIdNot(email,id).isPresent();
+    }
+
+    public List<UserDto> findAllAdmins() {
         return userRepository.findAll().stream().map(user -> conversionUtil.convertObjectTo(user, UserDto.class))
                 .collect(Collectors.toList());
     }
@@ -187,11 +208,32 @@ public class UserServiceImpl implements UserDetailsService, UserService {
             throw new EmailExistsException();
         }
         userDto.setPassword(bcryptEncoder.encode(userDto.getPassword()));
+        return saveOrUpdateUser(userDto);
+
+    }
+
+    public CUserDto updateUser(CUserDto userDto) {
+        log.info("Edit user with {}", userDto);
+        if (userDto.getId() == null) {
+            throw new RuntimeException("User ID is not present");
+        }
+        if (checkEmailExistenceForUser(userDto.getId(), userDto.getEmail())) {
+            log.info("Email {} already exist for  user ", userDto.getEmail());
+            throw new EmailExistsException();
+        }
+        User user = conversionUtil.convertObjectTo(userDto, User.class);
+        User userFromSession = this.userRepository.getOne(userDto.getId());
+        user.setPassword(userFromSession.getPassword());
+        User save1 = this.userRepository.save(user);
+        CUserDto userDto1 = conversionUtil.convertObjectTo(save1, CUserDto.class);
+        return userDto1;
+    }
+
+    private UserDto saveOrUpdateUser(UserDto userDto) {
         User user = conversionUtil.convertObjectTo(userDto, User.class);
         User save1 = this.userRepository.save(user);
         UserDto userDto1 = conversionUtil.convertObjectTo(save1, UserDto.class);
         return userDto1;
-
     }
 
     private Set<SimpleGrantedAuthority> getAuthority(User user) {

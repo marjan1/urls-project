@@ -1,5 +1,6 @@
 package com.eadvocate.rest.controller;
 
+import com.eadvocate.rest.dto.CUserDto;
 import com.eadvocate.rest.dto.UserDto;
 import com.eadvocate.service.UserService;
 import com.eadvocate.validation.ValidEmail;
@@ -30,9 +31,33 @@ public class UserController {
      * @return Page of users
      */
     @GetMapping(value = "/page")
-    public Page<UserDto> listUser(@RequestParam @NotNull Integer pageNumber, @RequestParam @NotNull Integer size) {
+    public Page<CUserDto> listUser(@RequestParam @NotNull Integer pageNumber,
+                                  @RequestParam @NotNull Integer size,
+                                  @RequestParam String filter,
+                                  @RequestParam(defaultValue = "asc") String sortOrder) {
         log.info("Request for getting all users received for page number {} with size {}", pageNumber, size);
-        return userService.findAll(pageNumber, size);
+        return userService.findAllAdmins(pageNumber, size, sortOrder, filter);
+    }
+
+    /**
+     * Get page of users for appropriate page number and size.
+     * @param pageNumber Integer
+     * @param size Integer
+     * @return Page of users
+     */
+    @GetMapping(value = "/admins/page")
+    public Page<CUserDto> listAdmins(@RequestParam @NotNull Integer pageNumber,
+                                    @RequestParam @NotNull Integer size,
+                                    @RequestParam String filter,
+                                    @RequestParam(defaultValue = "asc") String sortOrder) {
+        log.info("Request for getting all users received for page number {} with size {}", pageNumber, size);
+        return userService.findAllAdmins(pageNumber, size, sortOrder, filter);
+    }
+
+    @PostMapping(value = "/edit")
+    public CUserDto editUser(@RequestBody @ValidEmail CUserDto userDto) {
+        log.info("Request for activation of user with email {} received", userDto.getEmail());
+        return userService.updateUser(userDto);
     }
 
 
@@ -69,13 +94,13 @@ public class UserController {
 //    @GetMapping(value = "/advocates")
 //    @PreAuthorize("hasRole('ROLE_ADVOCATE')")
 //    public List<UserDto> listAdvocates() {
-//        return userService.findAll();
+//        return userService.findAllAdmins();
 //    }
 //
 //    @GetMapping(value = "/apprentices")
 //    @PreAuthorize("hasRole('ROLE_APPRENTICE')")
 //    public List<UserDto> listApprentices() {
-//        return userService.findAll();
+//        return userService.findAllAdmins();
 //    }
 
 

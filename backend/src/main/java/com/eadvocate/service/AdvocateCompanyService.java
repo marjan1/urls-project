@@ -92,13 +92,13 @@ public class AdvocateCompanyService {
 
         Pageable page = PageRequest.of(pageNumber, size, sort);
 
-        Page<AdvocateCompany> rezult = advocateCompanyRepository.findAll(page);
+        Page<AdvocateCompany> result = advocateCompanyRepository.findAll(page);
 
-        List<AdvocateCompanyDto> dtos = rezult.stream()
+        List<AdvocateCompanyDto> dtos = result.stream()
                 .map(advocateCompany -> conversionUtil.convertObjectTo(advocateCompany, AdvocateCompanyDto.class))
                 .collect(Collectors.toList());
 
-        Page<AdvocateCompanyDto> userDtoPage = new PageImpl<>(dtos, page, rezult.getTotalElements());
+        Page<AdvocateCompanyDto> userDtoPage = new PageImpl<>(dtos, page, result.getTotalElements());
 
         return userDtoPage;
     }

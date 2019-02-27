@@ -1,6 +1,7 @@
 package com.eadvocate.service;
 
 
+import com.eadvocate.rest.dto.CUserDto;
 import com.eadvocate.rest.dto.UserDto;
 import org.springframework.data.domain.Page;
 
@@ -9,14 +10,17 @@ import java.util.List;
 public interface UserService {
 
 
-
     UserDto addNewUser(UserDto user);
 
-    List<UserDto> findAll();
+    CUserDto updateUser(CUserDto user);
 
-    Page<UserDto> findAll(int page, int size);
+    List<UserDto> findAllAdmins();
+
+    Page<CUserDto> findAllAdmins(int page, int size, String sortOrder, String filter);
 
     boolean checkEmailExistence(String email);
+
+    boolean checkEmailExistenceForUser(Long id,String email);
 
     UserDto deleteUser(String email);
 
