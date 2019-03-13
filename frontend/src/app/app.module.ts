@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {ErrorDialogComponent} from "./_shared/error-dialog.component";
@@ -28,9 +28,14 @@ import {CompaniesComponent} from './portal-admin/companies/companies.component';
 import {AdminsComponent} from './portal-admin/admins/admins.component';
 import {PaHeaderComponent} from './portal-admin/pa-header/pa-header.component';
 import {CompanyService} from "./_service/company.service";
+import {CaHeaderComponent} from './company-admin/ca-header/ca-header.component';
+import {CompanyComponent} from './company-admin/company/company.component';
+import {CompanyUsersComponent} from './company-admin/company-users/company-users.component';
+import {CasesComponent} from './company-admin/cases/cases.component';
 
-;
-
+export function appInitFactory(provider: AppService) {
+  return()=> provider.load();
+}
 
 @NgModule({
   declarations: [
@@ -48,7 +53,11 @@ import {CompanyService} from "./_service/company.service";
     NewCompanyComponent,
     CompaniesComponent,
     AdminsComponent,
-    PaHeaderComponent],
+    PaHeaderComponent,
+    CaHeaderComponent,
+    CompanyComponent,
+    CompanyUsersComponent,
+    CasesComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -66,7 +75,8 @@ import {CompanyService} from "./_service/company.service";
       provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,
       multi: true
-    }
+    },
+    { provide: APP_INITIALIZER, useFactory: appInitFactory, deps: [AppService], multi: true }
   ],
   bootstrap: [AppComponent]
 })

@@ -75,7 +75,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .addFilter(new JWTAuthenticationFilter(authenticationManager(), objectMapper))
+                .addFilter(new JWTAuthenticationFilter(authenticationManager(), objectMapper, userServiceImpl))
                 .addFilter(new JWTAuthorizationFilter(authenticationManager(), userServiceImpl));
 
         http.headers().frameOptions().disable();

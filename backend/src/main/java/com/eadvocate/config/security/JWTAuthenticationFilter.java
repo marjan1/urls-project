@@ -1,6 +1,9 @@
 package com.eadvocate.config.security;
 
+import com.eadvocate.rest.dto.LoggedUser;
 import com.eadvocate.rest.dto.LoginUser;
+import com.eadvocate.rest.dto.UserDto;
+import com.eadvocate.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -33,15 +36,19 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     private ObjectMapper objectMapper;
 
+    private UserService userService;
+
     /**
      * Constructor for initializing the class.
-     *
-     * @param authenticationManager - from Spring Security used for authentication purposes
+     *  @param authenticationManager - from Spring Security used for authentication purposes
      * @param objectMapper          - for transferring data from HttpServletRequest to LoginUser object.
+     * @param userService
      */
-    public JWTAuthenticationFilter(AuthenticationManager authenticationManager, ObjectMapper objectMapper) {
+    public JWTAuthenticationFilter(AuthenticationManager authenticationManager, ObjectMapper objectMapper,
+                                   UserService userService) {
         this.authenticationManager = authenticationManager;
         this.objectMapper = objectMapper;
+        this.userService = userService;
     }
 
     /**
@@ -82,13 +89,12 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             Authentication authResult) throws IOException {
 
         String username = ((org.springframework.security.core.userdetails.User) authResult.getPrincipal()).getUsername();
+        UserDto user = this.userService.findOne(username);
+
         Collection<GrantedAuthority> grantedAuthorities = ((org.springframework.security.core.userdetails.User) authResult.getPrincipal()).getAuthorities();
         Map<String,Object> grantedAuthorityMap = new HashMap<>();
         grantedAuthorityMap.put("roles", grantedAuthorities);
-                //grantedAuthorities.stream().forEach()
 
-//        .collect(
-//                Collectors.toMap("dd", GrantedAuthority::getAuthority));
         String token = Jwts
                 .builder()
                 .setSubject(username)
@@ -96,8 +102,13 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .signWith(SignatureAlgorithm.HS512, SECRET)
                 .addClaims(grantedAuthorityMap)
                 .compact();
+
         String bearerToken = TOKEN_PREFIX + token;
-        response.getWriter().write(bearerToken);
+
+        LoggedUser loggedUser = LoggedUser.builder().user(user).bearerToken(bearerToken).build();
+        String responseBody = objectMapper.writeValueAsString(loggedUser);
+
+        response.getWriter().write(responseBody);
         response.addHeader(AUTHORIZATION_HEADER, bearerToken);
     }
 }

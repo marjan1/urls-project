@@ -18,14 +18,20 @@ export class UserService {
     return this.http.post<boolean>(this.baseUrl + '/app/emailcheck', email);
   }
 
+  getUserByUsername(email: string): Observable<User> {
+    console.log('get user by username ', email);
+    return this.http.post<User>(this.baseUrl + '/user/', email);
+  }
+
+
   signUpNewUser(user: User): Observable<User> {
     console.log('signup nw user  ', user);
     return this.http.post<User>(this.baseUrl + '/app/add', [user, user]);
   }
 
-  editAdmin(admin : CUser): Observable<User> {
+  editAdmin(admin : CUser): Observable<CUser> {
     console.log('Edit company admin  ', admin);
-    return this.http.post<User>(this.baseUrl + '/user/edit',
+    return this.http.post<CUser>(this.baseUrl + '/user/edit',
       admin);
   }
 

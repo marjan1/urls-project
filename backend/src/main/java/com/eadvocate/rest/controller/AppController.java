@@ -27,6 +27,11 @@ public class AppController {
     private AppService appService;
     private UserService userService;
 
+    @GetMapping(value = "/us")
+    public UserDto getAllStatuses1() {
+        log.info("Request for get all statuses");
+        return userService.findOne("marr@co.cv");
+    }
 
     @GetMapping(value = "/statuses")
     public List<StatusDto> getAllStatuses() {

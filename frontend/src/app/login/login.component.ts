@@ -5,6 +5,7 @@ import {MatDialog} from '@angular/material';
 import {TokenStorage} from '../_shared/token.storage';
 import {AuthService} from "../_service/auth.service";
 import {LoggedUser} from "../_model/logged-user.model";
+import {CurrentUser} from "../_model/current-user.model";
 
 @Component({
   selector: 'app-login',
@@ -24,8 +25,11 @@ export class LoginComponent {
 
   login(): void {
     this.authService.attemptAuth(this.username, this.password).subscribe(
-      (data : string )=> {
-        this.token.saveToken(data);
+      (data : CurrentUser )=> {
+        console.log(data);
+        // this.authService.currentUser. = data.user;
+
+        this.token.saveToken(data['bearerToken']);
         let  loggedUser : LoggedUser  = this.token.decodedToken;
 
         if(loggedUser.roles.find(value => value.authority === 'ROLE_PORTAL_ADMINISTRATOR')) {

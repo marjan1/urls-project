@@ -84,6 +84,12 @@ public class UserController {
         return userService.deleteUser(email);
     }
 
+    @PostMapping(value = "/")
+    public UserDto getUser(@RequestBody @ValidEmail String email) {
+        log.info("Request for deactivation of user with email {} received", email);
+        return userService.findOne(email);
+    }
+
 
 
 
