@@ -13,7 +13,7 @@ export class TokenStorage {
   constructor() { }
 
   signOut() {
-    window.sessionStorage.removeItem(TOKEN_KEY);
+    sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.clear();
     this.decodedToken = null;
   }

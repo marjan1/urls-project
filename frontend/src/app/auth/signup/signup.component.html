@@ -1,0 +1,59 @@
+<mat-toolbar class="example-card">
+  <span>Sign In</span>
+</mat-toolbar>
+<mat-card class="example-card">
+  <mat-card-content>
+    <form class="my-form" [formGroup]="signupForm">
+      <mat-form-field class="full-width">
+        <mat-label>First Name</mat-label>
+        <input matInput placeholder="First name"
+               formControlName="firstname">
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Last Name</mat-label>
+        <input matInput placeholder="Last Name" formControlName="lastname">
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Email" formControlName="email">
+        <mat-error *ngIf="signupForm.get('email').errors !== null &&signupForm.get('email').errors['emailIsForbidden']">
+          Email is already used
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+
+        <mat-label>Password</mat-label>
+        <input matInput placeholder="Enter your password" formControlName="password"
+               [type]="hide ? 'password' : 'text'">
+        <mat-icon class="example-icon" matSuffix (click)="hide = !hide">
+          {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Confirm password" formControlName="confirmPassword"
+               [type]="hide ? 'password' : 'text'">
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        <mat-error *ngIf="signupForm.get('confirmPassword').errors">
+          Passwords do not match
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Phone</mat-label>
+        <input matInput placeholder="Phone" formControlName="phone">
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-select placeholder="Roles" formControlName="uroles" multiple>
+          <mat-option *ngFor="let role of roles" [value]="role">{{role.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-select placeholder="Status" formControlName="ustatus">
+          <mat-option *ngFor="let status of statuses" [value]="status">{{status.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button (click)="register()" color="primary">REGISTER</button>
+  </mat-card-actions>
+</mat-card>

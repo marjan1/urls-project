@@ -4,7 +4,6 @@ import {MatDialog} from '@angular/material';
 // import {AuthService} from '../core/auth.service';
 import {TokenStorage} from '../_shared/token.storage';
 import {AuthService} from "../_service/auth.service";
-import {LoggedUser} from "../_model/logged-user.model";
 import {CurrentUser} from "../_model/current-user.model";
 
 @Component({
@@ -27,18 +26,19 @@ export class LoginComponent {
     this.authService.attemptAuth(this.username, this.password).subscribe(
       (data : CurrentUser )=> {
         console.log(data);
-        // this.authService.currentUser. = data.user;
+        this.authService.loggedUser = data['user'];
+      //  this.authService.currentUserSubject.next(data);
+        //
+         this.token.saveToken(data['bearerToken']);
+   //     let  loggedUser : LoggedUser  = this.token.decodedToken;
 
-        this.token.saveToken(data['bearerToken']);
-        let  loggedUser : LoggedUser  = this.token.decodedToken;
-
-        if(loggedUser.roles.find(value => value.authority === 'ROLE_PORTAL_ADMINISTRATOR')) {
+        if(data['user'].roleDtos.find(value => value.name === 'ROLE_PORTAL_ADMINISTRATOR')) {
           this.router.navigate(['portal-admin']);
-        }else if(loggedUser.roles.find(value => value.authority === 'ROLE_ADVOCATE_COMPANY_ADMINISTRATOR')) {
+        }else if(data['user'].roleDtos.find(value => value.name === 'ROLE_ADVOCATE_COMPANY_ADMINISTRATOR')) {
           this.router.navigate(['company-admin']);
-        }else if(loggedUser.roles.find(value => value.authority === 'ROLE_ADVOCATE')) {
+        }else if(data['user'].roleDtos.find(value => value.name === 'ROLE_ADVOCATE')) {
           this.router.navigate(['advocate']);
-        } else if(loggedUser.roles.find(value => value.authority === 'ROLE_APPRENTICE')) {
+        } else if(data['user'].roleDtos.find(value => value.name === 'ROLE_APPRENTICE')) {
           this.router.navigate(['apprentice']);
         }
       }

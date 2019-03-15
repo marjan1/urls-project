@@ -18,16 +18,26 @@ import {CompanyUsersComponent} from "../company-admin/company-users/company-user
 
 const routes: Routes = [
   {path: '', redirectTo: '/', pathMatch: 'full'},
-  {path: 'portal-admin', canActivate: [AuthGuard], component: PortalAdminComponent, children:[
-      { path: '', component: CompaniesComponent },
-      { path: 'new', component: NewCompanyComponent },
-      { path: 'admins', component: AdminsComponent }
-    ]},
-  {path: 'company-admin', canActivate: [AuthGuard], component: CompanyAdminComponent, children: [
-      { path: '', component: CasesComponent },
-      { path: 'company', component: CompanyComponent },
-      { path: 'users', component: CompanyUsersComponent }
-    ]},
+  {
+    path: 'portal-admin',
+    canActivate: [AuthGuard],
+    component: PortalAdminComponent,
+    children: [
+      {path: '', component: CompaniesComponent},
+      {path: 'new', component: NewCompanyComponent},
+      {path: 'admins', component: AdminsComponent}
+    ]
+  },
+  {
+    path: 'company-admin',
+    canActivate: [AuthGuard],
+    component: CompanyAdminComponent,
+    children: [
+      {path: '', component: CasesComponent},
+      {path: 'company', component: CompanyComponent},
+      {path: 'users', component: CompanyUsersComponent}
+    ]
+  },
   {path: 'advocate', component: AdvocateComponent},
   {path: 'apprentice', component: ApprenticeComponent},
   {path: 'login', component: LoginComponent},

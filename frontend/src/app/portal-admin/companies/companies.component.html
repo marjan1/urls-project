@@ -1,0 +1,135 @@
+
+<div *ngIf="editCompanyMode">
+  <mat-toolbar class="toolbar-custom">
+    <span>Edit Company</span>
+  </mat-toolbar>
+  <mat-card class="example-card">
+    <mat-card-content>
+      <form class="my-form" [formGroup]="newCompanyForm">
+
+        <mat-form-field class="full-width">
+          <mat-label>Company Name</mat-label>
+          <input matInput placeholder="Company name"
+                 formControlName="name">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Address</mat-label>
+          <input matInput placeholder="Address"
+                 formControlName="address">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Company Phone</mat-label>
+          <input matInput placeholder="Company phone"
+                 formControlName="companyPhone">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Company Email</mat-label>
+          <input matInput placeholder="Company email"
+                 formControlName="companyEmail">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Embs</mat-label>
+          <input matInput placeholder="EMBS"
+                 formControlName="embs">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Edbs</mat-label>
+          <input matInput placeholder="EDBS"
+                 formControlName="edbs">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-select placeholder="Type" formControlName="companyType">
+            <mat-option [value]="0">Office</mat-option>
+            <mat-option [value]="1">Solo</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-select placeholder="Status" formControlName="cstatus">
+            <mat-option *ngFor="let status of statuses" [value]="status">{{status.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button type="submit"(click)="editCompany()" color="primary">Save</button>
+      <button mat-raised-button type="submit"(click)="editCompanyMode = false" color="warn">Cancel</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<div class="course">
+  <mat-form-field>
+    <input matInput placeholder="Search companies" #input>
+  </mat-form-field>
+  <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>
+
+
+<div class="container-custom">
+  <table mat-table class="mat-elevation-z8" [dataSource]="dataSource"
+         matSort matSortActive="name" matSortDirection="asc" matSortDisableClear>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name</th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+    <!-- Position Column -->
+    <ng-container matColumnDef="address">
+      <th mat-header-cell *matHeaderCellDef> Address</th>
+      <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+    </ng-container>
+
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef> Phone</th>
+      <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> Email</th>
+      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="embs">
+      <th mat-header-cell *matHeaderCellDef> EMBS</th>
+      <td mat-cell *matCellDef="let element"> {{element.embs}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="edbs">
+      <th mat-header-cell *matHeaderCellDef> EDBS</th>
+      <td mat-cell *matCellDef="let element"> {{element.edbs}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef> Type</th>
+      <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef> Status</th>
+      <td mat-cell *matCellDef="let element"> {{element.status.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef> Edit</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-button (click)="editElement(element)">
+          Edit
+        </button>
+      </td>
+
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [length]="dataSource.numberOfCompanies | async"
+                 [pageSizeOptions]="[3, 10, 20]" showFirstLastButtons></mat-paginator>
+
+</div>

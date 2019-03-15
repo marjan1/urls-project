@@ -6,32 +6,40 @@ import {PortalAdminComponent} from "../portal-admin/portal-admin.component";
 import {CompanyAdminComponent} from "../company-admin/company-admin.component";
 import {AdvocateComponent} from "../advocate/advocate.component";
 import {ApprenticeComponent} from "../apprentice/apprentice.component";
+import {AuthService} from "./auth.service";
+import {User} from "../_model/user.model";
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild {
-  constructor(private tokenStorage: TokenStorage, private router: Router) {
+
+  public loggedUser: User = null;
+
+  constructor(private tokenStorage: TokenStorage, private router: Router,
+              private authService: AuthService) {
   }
+
 
   canActivate(route: ActivatedRouteSnapshot,
               state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    console.log("Eve me");
-    let decodedToken = this.tokenStorage.getDecodedToken();
+    console.log("Guard can activateMethod");
+    let user = this.authService.getLoggedUser();
+    //  let decodedToken = this.tokenStorage.getDecodedToken();
     let accessDenied: string = 'page-not-found';
-    if (decodedToken) {
+    if (user) {
       console.log('decoded token 1');
       if (route.component === PortalAdminComponent &&
-        decodedToken.roles.find(value => value.authority === 'ROLE_PORTAL_ADMINISTRATOR')) {
+        user.roleDtos.find(value => value.name === 'ROLE_PORTAL_ADMINISTRATOR')) {
         console.log('decoded token 2');
         return true;
       } else if (route.component === CompanyAdminComponent &&
-        decodedToken.roles.find(value => value.authority === 'ROLE_ADVOCATE_COMPANY_ADMINISTRATOR')) {
+        user.roleDtos.find(value => value.name === 'ROLE_ADVOCATE_COMPANY_ADMINISTRATOR')) {
         console.log('decoded token 3');
         return true;
       } else if (route.component === AdvocateComponent &&
-        decodedToken.roles.find(value => value.authority === 'ROLE_ADVOCATE')) {
+        user.roleDtos.find(value => value.name === 'ROLE_ADVOCATE')) {
         return true;
       } else if (route.component === ApprenticeComponent &&
-        decodedToken.roles.find(value => value.authority === 'ROLE_APPRENTICE')) {
+        user.roleDtos.find(value => value.name === 'ROLE_APPRENTICE')) {
         return true;
       } else {
         console.log('decoded token Access Denied');
@@ -40,7 +48,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
 
     } else {
       console.log('user not logged in');
-      this.router.navigate([accessDenied]);
+     this.authService.logout();
     }
   }
 
@@ -48,4 +56,6 @@ export class AuthGuard implements CanActivate, CanActivateChild {
                    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     return this.canActivate(route, state);
   }
+
+
 }

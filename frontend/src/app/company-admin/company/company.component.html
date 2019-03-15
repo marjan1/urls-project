@@ -1,0 +1,56 @@
+
+<mat-toolbar class="toolbar-custom">
+  <span>Edit Company</span>
+</mat-toolbar>
+<mat-card class="example-card">
+  <mat-card-content>
+    <form class="my-form" [formGroup]="companyForm">
+
+      <mat-form-field class="full-width">
+        <mat-label>Company Name</mat-label>
+        <input matInput placeholder="Company name"
+               formControlName="name">
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Address</mat-label>
+        <input matInput placeholder="Address"
+               formControlName="address">
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Company Phone</mat-label>
+        <input matInput placeholder="Company phone"
+               formControlName="companyPhone">
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Company Email</mat-label>
+        <input matInput placeholder="Company email"
+               formControlName="companyEmail">
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Embs</mat-label>
+        <input matInput placeholder="EMBS"
+               formControlName="embs">
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Edbs</mat-label>
+        <input matInput placeholder="EDBS"
+               formControlName="edbs">
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-select placeholder="Type" formControlName="companyType">
+          <mat-option [value]="0">Office</mat-option>
+          <mat-option [value]="1">Solo</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-select placeholder="Status" formControlName="cstatus">
+          <mat-option *ngFor="let status of statuses" [value]="status">{{status.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button type="submit"(click)="validateCompanyForm()" color="primary">Next</button>
+  </mat-card-actions>
+</mat-card>
+

@@ -32,6 +32,7 @@ import {CaHeaderComponent} from './company-admin/ca-header/ca-header.component';
 import {CompanyComponent} from './company-admin/company/company.component';
 import {CompanyUsersComponent} from './company-admin/company-users/company-users.component';
 import {CasesComponent} from './company-admin/cases/cases.component';
+import {ResolverService} from "./_service/resover.service";
 
 export function appInitFactory(provider: AppService) {
   return()=> provider.load();
@@ -70,6 +71,7 @@ export function appInitFactory(provider: AppService) {
   providers: [ErrorDialogComponent, UserService, AuthService, TokenStorage, TokenStorage,
     AuthGuard,
     AppService,
+    ResolverService,
     CompanyService,
     {
       provide: HTTP_INTERCEPTORS,
