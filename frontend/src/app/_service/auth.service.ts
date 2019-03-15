@@ -14,9 +14,11 @@ export class AuthService {
 
   baseUrl: 'http://localhost:8080/email2sms/';
 
-  public currentUserSubject = new BehaviorSubject<User>(null)
-  // .publishReplay(1).refCount();
-  //public currentUser = this.currentUserSubject.asObservable();
+  public isLoggedUserSubject = new BehaviorSubject<boolean>(false);
+  public  isuserLogged$ = this.isLoggedUserSubject.asObservable()
+    .publishReplay(1).refCount();
+
+  //public currentUser = this.isLoggedUserSubject.asObservable();
   // .publishReplay(1).refCount();
   public currentUser = new Observable<CurrentUser>();
   public loggedUser: User = null;
@@ -26,8 +28,8 @@ export class AuthService {
               private tokenStorage: TokenStorage,
               private userService: UserService,
               private router: Router) {
-    // this.currentUserSubject = new BehaviorSubject<LoggedUser>(tokenStorage.getDecodedToken());
-    // this.currentUser = this.currentUserSubject.asObservable();
+    // this.isLoggedUserSubject = new BehaviorSubject<LoggedUser>(tokenStorage.getDecodedToken());
+    // this.currentUser = this.isLoggedUserSubject.asObservable();
     // this.currentUser.subscribe(data => {
     //   this.loggedUser = data['user'];
     //   this.tokenStorage.saveToken(data['bearerToken']);
@@ -39,16 +41,14 @@ export class AuthService {
 
     const credentials = {email: ussername, password: password};
     console.log('attempAuth ::');
-    // localStorage.setItem(this.storageName, JSON.stringify(data));
-    this.currentUser = this.http.post<CurrentUser>('http://localhost:8080/login ', credentials);
 
-      //.publishReplay(1).refCount();
-    return this.currentUser;
-    //return this.http.post('http://localhost:8080/login ', credentials,{ responseType: 'text' });
+   return this.http.post<CurrentUser>('http://localhost:8080/login ', credentials);
+
   }
 
   logout(){
     this.tokenStorage.signOut();
+    this.isLoggedUserSubject.next(false);
     this.router.navigate(['/login']);
   }
 

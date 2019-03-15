@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {TokenStorage} from "../_shared/token.storage";
+import {AuthService} from "../_service/auth.service";
 
 @Component({
   selector: 'app-header',
@@ -10,11 +10,14 @@ import {TokenStorage} from "../_shared/token.storage";
 export class HeaderComponent implements OnInit {
 
   isLoggedIn : boolean;
-  constructor(private tokenStorage : TokenStorage, private router: Router ) { }
+  constructor(private authService: AuthService, private router: Router ) { }
 
 
   ngOnInit() {
-    this.isLoggedIn = !!this.tokenStorage.getToken();
+    this.authService.isuserLogged$.subscribe(
+      value => this.isLoggedIn = value
+    )
+
   }
 
   showSignin(){
@@ -22,8 +25,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout(){
-    this.tokenStorage.signOut();
-    this.router.navigate(['/login']);
+    this.authService.logout();
   }
 
   showSignup(){

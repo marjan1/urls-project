@@ -27,7 +27,7 @@ export class LoginComponent {
       (data : CurrentUser )=> {
         console.log(data);
         this.authService.loggedUser = data['user'];
-      //  this.authService.currentUserSubject.next(data);
+        this.authService.isLoggedUserSubject.next(true);
         //
          this.token.saveToken(data['bearerToken']);
    //     let  loggedUser : LoggedUser  = this.token.decodedToken;
