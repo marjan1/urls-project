@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  * Rest controller class used for requests and responses
- * related to User.
+ * related to User. -Cleanup start
  */
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
