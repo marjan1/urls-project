@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @AllArgsConstructor
@@ -28,7 +26,7 @@ public class AuthenticationController {
      * @return UserDto with data from the user that is added.
      */
     @PostMapping(value = "/signup")
-    public UserDto signupNewUser(@RequestBody @Valid UserDto userDto) {
+    public UserDto signupNewUser(@RequestBody  UserDto userDto) {
         log.info("Request for signup new user with data {} received", userDto);
         return userService.addNewUser(userDto);
     }

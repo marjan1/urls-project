@@ -19,5 +19,7 @@ public class AddLinkDto {
 
     @NotNull
     private String link;
+
+    @NotNull
     private List<String> tags;
 }

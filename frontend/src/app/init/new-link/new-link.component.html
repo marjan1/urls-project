@@ -8,20 +8,22 @@
 
       <mat-form-field class="full-width">
         <mat-label>Link</mat-label>
-        <input matInput placeholder="Link"
+        <input matInput placeholder="Link" required (blur)="getSuggestions()"
                formControlName="url">
       </mat-form-field>
 
       <mat-form-field class="full-width">
         <mat-label> Add tags separated by space  </mat-label>
-        <input matInput  placeholder="Tags"
+        <input matInput  placeholder="Tags" required
                formControlName="tags">
       </mat-form-field>
 
     </form>
+    <p>Tag suggestions:</p>
+    <p>{{suggestioTags.join(', ')}}</p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button type="submit" (click)="addNewLinkSubmit()" color="primary">Add</button>
+    <button mat-raised-button type="submit" (click)="addNewLinkSubmit()" color="primary">Add Link</button>
   </mat-card-actions>
 </mat-card>
 

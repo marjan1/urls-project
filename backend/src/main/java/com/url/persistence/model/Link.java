@@ -27,6 +27,6 @@ public class Link {
     @NotNull
     private User user;
 
-    @OneToMany(mappedBy="link")
+    @OneToMany(mappedBy="link", fetch = FetchType.EAGER)
     private Set<LinkParam> linkParams;
 }

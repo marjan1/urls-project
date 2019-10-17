@@ -8,6 +8,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
@@ -24,5 +25,11 @@ public class LinkController {
     public LinkDto add(@RequestBody @Valid AddLinkDto addLinkDto) {
         log.info("Request for adding new link with text {}", addLinkDto.getLink());
         return this.linkService.addLink(addLinkDto);
+    }
+
+    @GetMapping(value = "/suggestions")
+    public List<String> getSuggestions(@RequestParam String link) {
+        log.info("Getting tag suggestions for link {}", link);
+        return this.linkService.suggestedTags(link);
     }
 }

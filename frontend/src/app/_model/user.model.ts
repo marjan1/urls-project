@@ -10,6 +10,4 @@ export class User {
   phone: string;
 
 
-  accountGroupLevel: number;
-
 }

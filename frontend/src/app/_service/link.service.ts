@@ -22,12 +22,20 @@ export class LinkService {
 
   signUpNewUser(user: User): Observable<User> {
     console.log('signup nw user  ', user);
-    return this.http.post<User>(this.baseUrl + '/link/add', user);
+    return this.http.post<User>(this.baseUrl + '/signup', user);
   }
 
   addNewLink(addLink: AddLink): Observable<Link> {
     console.log('add new link  ', addLink);
     return this.http.post<Link>(this.baseUrl + '/link/add', addLink);
+  }
+
+  getSuggestionsForLink(link:string): Observable<any>{
+    return this.http.get(this.baseUrl + '/link/suggestions', {
+      params: {
+        link: link
+      }
+    });
   }
 
 

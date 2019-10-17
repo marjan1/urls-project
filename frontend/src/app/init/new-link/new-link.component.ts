@@ -6,6 +6,7 @@ import {User} from "../../_model/user.model";
 import {LinkService} from "../../_service/link.service";
 import {AddLink} from "../../_model/add-link.model";
 import {Link} from "../../_model/link.model";
+import {MatSnackBarConfig, MatSnackBarHorizontalPosition} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-new-company',
@@ -17,20 +18,28 @@ export class NewLinkComponent implements OnInit {
 
   hide = true;
   newCompanyForm: FormGroup;
-  newCompanyAdminForm: FormGroup;
   user: User;
   addLink: AddLink;
   links: Link[];
+  suggestioTags: string[];
   showAdminForm: boolean;
 
+  message: string = 'Snack Bar opened.';
+  actionButtonLabel: string = 'Retry';
+  action: boolean = true;
+  setAutoHide: boolean = true;
+  autoHide: number = 2000;
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+
   constructor(private appService: AppService,
-              private userService: LinkService,
+              private linkService: LinkService,
               private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
     this.showAdminForm = false;
     this.links = [];
+    this.suggestioTags = [];
 
     this.newCompanyForm = new FormGroup({
       'url': new FormControl('', Validators.required),
@@ -46,13 +55,26 @@ export class NewLinkComponent implements OnInit {
     this.addLink.link = this.newCompanyForm.get('url').value;
     this.addLink.tags = this.newCompanyForm.get('tags').value.split(" ");
 
-    this.userService.addNewLink(this.addLink).subscribe(
+    this.linkService.addNewLink(this.addLink).subscribe(
       (link: Link) => {
         this.links.push(link);
+        let config = new MatSnackBarConfig();
+
+        config.horizontalPosition = this.horizontalPosition;
+        config.duration = this.setAutoHide ? this.autoHide : 0;
+
+        this.snackBar.open(this.message, this.action ? this.actionButtonLabel : undefined, config);
       }
     )
+  }
 
-
+  getSuggestions(){
+    console.log("Eve ima  blur");
+    this.linkService.getSuggestionsForLink(this.newCompanyForm.get('url').value).subscribe(
+      (value:any)=>{
+        this.suggestioTags = value;
+      }
+    )
   }
 
 

@@ -22,7 +22,7 @@ public class LinkTag {
     private String tag;
 
     @NotNull
-    private Integer occurrences;
+    private Long occurrences;
 
     @ManyToOne
     @JoinColumn(name="link_id", nullable=false)

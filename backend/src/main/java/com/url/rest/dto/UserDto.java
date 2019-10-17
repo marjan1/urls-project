@@ -46,10 +46,4 @@ public class UserDto {
 
 
 
-
-
-    @NotNull
-    private Short accountGroupLevel;
-
-
 }
