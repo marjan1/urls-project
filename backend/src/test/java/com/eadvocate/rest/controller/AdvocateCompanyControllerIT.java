@@ -183,9 +183,6 @@ public class AdvocateCompanyControllerIT {
                 .email(temp + "c7@company1.com")
                 .password("passMarjan1!")
                 .matchingPassword("passMarjan1!")
-                .roleDto(portalAdminRole)
-                .statusDto(statusDto)
-                .accountGroupLevel((short) 1)
                 .build();
 
         MvcResult result = mvc.perform(post("/api/signup").contentType(APPLICATION_JSON_UTF8)

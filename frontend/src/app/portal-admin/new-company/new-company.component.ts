@@ -108,8 +108,7 @@ export class NewCompanyComponent implements OnInit {
       this.user.email = this.newCompanyAdminForm.get('email').value;
       this.user.password = this.newCompanyAdminForm.get('password').value;
       this.user.phone = this.newCompanyAdminForm.get('phone').value;
-      this.user.roleDtos = this.newCompanyAdminForm.get('uroles').value;
-      this.user.statusDto = this.newCompanyAdminForm.get('ustatus').value;
+
       this.user.accountGroupLevel = 1;
 
 

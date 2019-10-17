@@ -12,8 +12,7 @@ export class User {
   password: string;
   matchingPassword: string;
   phone: string;
-  roleDtos: Role[];
-  statusDto: Status;
+
   advocateCompany: AdvocateCompany;
   accountGroupLevel: number;
 

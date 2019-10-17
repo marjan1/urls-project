@@ -4,11 +4,13 @@ package com.eadvocate.rest.dto;
 import com.eadvocate.validation.PasswordMatches;
 import com.eadvocate.validation.ValidEmail;
 import com.eadvocate.validation.ValidPassword;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Set;
 /**
  * Dto class for validation and transfer User data.
  */
@@ -42,13 +44,9 @@ public class UserDto {
 
     private String phone;
 
-    @Singular
-    private Set<RoleDto> roleDtos;
 
-    @NotNull
     private StatusDto statusDto;
 
-    private AdvocateCompanyDto advocateCompany;
 
 
     @NotNull

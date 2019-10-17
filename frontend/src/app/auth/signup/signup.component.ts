@@ -46,9 +46,7 @@ export class SignupComponent implements OnInit {
         this.forbiddenEmails.bind(this)),
       'password': new FormControl('', Validators.required),
       'confirmPassword': new FormControl('', Validators.required),
-      'phone': new FormControl('', Validators.required),
-      'uroles': new FormControl(''),
-      'ustatus': new FormControl('')
+      'username': new FormControl('', Validators.required)
     }, [
       ConfirmPasswordValidator.MatchPassword
     ]);
@@ -63,10 +61,7 @@ export class SignupComponent implements OnInit {
       user.email = this.signupForm.get('email').value;
       user.password = this.signupForm.get('password').value;
       user.matchingPassword = this.signupForm.get('confirmPassword').value;
-      user.phone = this.signupForm.get('phone').value;
-      user.roleDtos = this.signupForm.get('uroles').value;
-      user.statusDto = this.signupForm.get('ustatus').value;
-      user.accountGroupLevel = 1;
+      user.phone = this.signupForm.get('username').value;
 
       this.userService.signUpNewUser(user).subscribe(
         (user: User) => {

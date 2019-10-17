@@ -73,7 +73,6 @@ public class SecurityIT {
                 .email("m1@company1.com")
                 .password("passMarjan1!")
                 .matchingPassword("passMarjan1!")
-                .roleDto(portalAdminRole)
                 .build();
 
         MvcResult result = mvc.perform(post("/api/signup").contentType(APPLICATION_JSON_UTF8)
@@ -107,7 +106,6 @@ public class SecurityIT {
                 .email("m78@company1.com")
                 .password("passMarjan1!")
                 .matchingPassword("passMarjan1!")
-                .roleDto(portalAdminRole)
                 .build();
 
         MvcResult result = mvc.perform(post("/api/signup").contentType(APPLICATION_JSON_UTF8)
@@ -140,7 +138,6 @@ public class SecurityIT {
                 .email("m4@company1.com")
                 .password("passMarjan1!")
                 .matchingPassword("passMarjan1!")
-                .roleDto(portalAdminRole)
                 .build();
 
         MvcResult result = mvc.perform(post("/api/signup").contentType(APPLICATION_JSON_UTF8)
@@ -173,7 +170,6 @@ public class SecurityIT {
                 .email("u3@company1.com")
                 .password("passMarjan1!")
                 .matchingPassword("passMarjan1!")
-                .roleDto(portalAdminRole)
                 .build();
 
         MvcResult result = mvc.perform(post("/api/signup").contentType(APPLICATION_JSON_UTF8)
@@ -195,7 +191,6 @@ public class SecurityIT {
                 .email("c7@company1.com")
                 .password("passMarjan1!")
                 .matchingPassword("passMarjan1!")
-                .roleDto(portalAdminRole)
                 .build();
 
         MvcResult result = mvc.perform(post("/api/signup").contentType(APPLICATION_JSON_UTF8)

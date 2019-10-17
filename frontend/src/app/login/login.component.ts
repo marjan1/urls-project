@@ -32,15 +32,8 @@ export class LoginComponent {
          this.token.saveToken(data['bearerToken']);
    //     let  loggedUser : LoggedUser  = this.token.decodedToken;
 
-        if(data['user'].roleDtos.find(value => value.name === 'ROLE_PORTAL_ADMINISTRATOR')) {
-          this.router.navigate(['portal-admin']);
-        }else if(data['user'].roleDtos.find(value => value.name === 'ROLE_ADVOCATE_COMPANY_ADMINISTRATOR')) {
-          this.router.navigate(['company-admin']);
-        }else if(data['user'].roleDtos.find(value => value.name === 'ROLE_ADVOCATE')) {
-          this.router.navigate(['advocate']);
-        } else if(data['user'].roleDtos.find(value => value.name === 'ROLE_APPRENTICE')) {
-          this.router.navigate(['apprentice']);
-        }
+ this.router.navigate(['portal-admin']);
+
       }
     );
   }

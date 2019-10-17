@@ -93,9 +93,6 @@ public class UserControllerIT {
                 .email("novUser2@companyy.com")
                 .password("passMarjan1!")
                 .matchingPassword("passMarjan1!")
-                .roleDto(portalAdminRoleForNewUser)
-                .statusDto(conversionUtil.convertObjectTo(statusRepository.getByName("Active"), StatusDto.class))
-                .accountGroupLevel((short) 1)
                 .build();
 
         MvcResult addedUser = mvc.perform(post("/api/user/add")
@@ -156,9 +153,6 @@ public class UserControllerIT {
                 .email("novUser@companyy.com")
                 .password("passMarjan1!")
                 .matchingPassword("passMarjan1!")
-                .roleDto(roleAdvocate)
-                .statusDto(conversionUtil.convertObjectTo(statusRepository.getByName("Active"), StatusDto.class))
-                .accountGroupLevel((short) 1)
                 .build();
 
         MvcResult addedUser = mvc.perform(post("/api/user/add")
@@ -207,9 +201,6 @@ public class UserControllerIT {
                     .password("passMarjan1!" + i)
                     .matchingPassword("passMarjan1!" + i)
                     .phone("phoneN" + i)
-                    .roleDto(roleAdvocate)
-                    .statusDto(conversionUtil.convertObjectTo(statusRepository.getByName("Active"), StatusDto.class))
-                    .accountGroupLevel((short) 1)
                     .build();
 
             mvc.perform(post("/api/user/add")
@@ -259,9 +250,6 @@ public class UserControllerIT {
                 .email(temp + "c7@company1.com")
                 .password("passMarjan1!")
                 .matchingPassword("passMarjan1!")
-                .roleDto(portalAdminRole)
-                .statusDto(statusDto)
-                .accountGroupLevel((short) 1)
                 .build();
 
         MvcResult result = mvc.perform(post("/api/signup").contentType(APPLICATION_JSON_UTF8)

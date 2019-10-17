@@ -1,0 +1,93 @@
+2019-10-17 10:22:47,352 INFO o.s.b.StartupInfoLogger [main] Starting ELawyerApplicationTests on DESKTOP-M4N1T0F with PID 63252 (started by marja in C:\Users\marja\IdeaProjects\e-advocates-project\backend)
+2019-10-17 10:22:47,361 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v2.1.2.RELEASE, Spring v5.1.4.RELEASE
+2019-10-17 10:22:47,361 INFO o.s.b.SpringApplication [main] The following profiles are active: prod
+2019-10-17 10:22:48,377 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-10-17 10:22:48,528 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 143ms. Found 13 repository interfaces.
+2019-10-17 10:22:49,189 INFO o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [main] Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$57c78ad] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-10-17 10:22:49,260 INFO o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [main] Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration$$EnhancerBySpringCGLIB$$9e2a40e7] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-10-17 10:22:49,273 INFO o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [main] Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-10-17 10:22:49,276 INFO o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [main] Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@ed91d8d' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-10-17 10:22:49,287 INFO o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [main] Bean 'methodSecurityConfigurer' of type [com.eadvocate.config.security.MethodSecurityConfigurer$$EnhancerBySpringCGLIB$$c1914c0c] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-10-17 10:22:49,301 INFO o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [main] Bean 'org.springframework.security.config.annotation.method.configuration.Jsr250MetadataSourceConfiguration' of type [org.springframework.security.config.annotation.method.configuration.Jsr250MetadataSourceConfiguration$$EnhancerBySpringCGLIB$$e853fbaf] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-10-17 10:22:49,313 INFO o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [main] Bean 'jsr250MethodSecurityMetadataSource' of type [org.springframework.security.access.annotation.Jsr250MethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-10-17 10:22:49,319 INFO o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [main] Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-10-17 10:22:49,663 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Starting...
+2019-10-17 10:22:50,420 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Start completed.
+2019-10-17 10:22:50,512 INFO o.h.j.i.u.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-10-17 10:22:50,644 INFO o.h.Version [main] HHH000412: Hibernate Core {5.3.7.Final}
+2019-10-17 10:22:50,646 INFO o.h.c.Environment [main] HHH000206: hibernate.properties not found
+2019-10-17 10:22:50,887 INFO o.h.a.c.r.j.JavaReflectionManager [main] HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2019-10-17 10:22:51,096 INFO o.h.d.Dialect [main] HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2019-10-17 10:22:52,110 INFO o.s.o.j.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-10-17 10:22:53,177 INFO o.h.h.i.QueryTranslatorFactoryInitiator [main] HHH000397: Using ASTQueryTranslatorFactory
+2019-10-17 10:22:54,635 INFO o.s.s.w.DefaultSecurityFilterChain [main] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@19c24321, org.springframework.security.web.context.SecurityContextPersistenceFilter@16c9f7f0, org.springframework.security.web.header.HeaderWriterFilter@29d33f1, org.springframework.web.filter.CorsFilter@ba27ce6, org.springframework.security.web.authentication.logout.LogoutFilter@42012093, com.eadvocate.config.security.JWTAuthenticationFilter@97cb8dc, com.eadvocate.config.security.JWTAuthorizationFilter@261b6c8c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7d75940, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7615666e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2dcbf825, org.springframework.security.web.session.SessionManagementFilter@5daa621b, org.springframework.security.web.access.ExceptionTranslationFilter@6c2fea95, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4a094f90]
+2019-10-17 10:22:55,196 INFO o.s.s.c.ExecutorConfigurationSupport [main] Initializing ExecutorService 'applicationTaskExecutor'
+2019-10-17 10:22:55,297 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-10-17 10:22:55,357 TRACE o.s.w.s.h.AbstractHandlerMethodMapping [main] 
+	c.e.r.c.AdvocateCompanyController:
+	{GET /advocatecompany/page}: listUser(Integer,Integer,String,String)
+	{POST /advocatecompany/addwithadmin}: addAdvocateCompanyWithAdmin(CompanyUserDto)
+	{POST /advocatecompany/add}: addAdvocateCompany(AdvocateCompanyDto)
+	{POST /advocatecompany/activate}: activateAdvocateCompany(AdvocateCompanyDto)
+	{POST /advocatecompany/deactivate}: deactivateAdvocateCompany(AdvocateCompanyDto)
+2019-10-17 10:22:55,366 TRACE o.s.w.s.h.AbstractHandlerMethodMapping [main] 
+	c.e.r.c.AppController:
+	{GET /app/roles}: getAllRoles()
+	{GET /app/us}: getAllStatuses1()
+	{GET /app/statuses}: getAllStatuses()
+	{POST /app/add}: addNewUser(UserDto)
+	{POST /app/emailcheck}: checkEmailExistence(String)
+2019-10-17 10:22:55,370 TRACE o.s.w.s.h.AbstractHandlerMethodMapping [main] 
+	c.e.r.c.AuthenticationController:
+	{POST /signup}: signupNewUser(UserDto)
+2019-10-17 10:22:55,374 TRACE o.s.w.s.h.AbstractHandlerMethodMapping [main] 
+	c.e.r.c.ClientCompanyController:
+	{POST /clientcompany/add}: addClientPerson(ClientCompanyDto)
+	{POST /clientcompany/page}: getPageWithClientCompaniesForCompany(Integer,Integer,AdvocateCompanyDto)
+2019-10-17 10:22:55,378 TRACE o.s.w.s.h.AbstractHandlerMethodMapping [main] 
+	c.e.r.c.ClientPersonController:
+	{POST /clientperson/add}: addClientPerson(ClientPersonDto)
+	{POST /clientperson/page}: getPageWithClientPersonsForCompany(Integer,Integer,AdvocateCompanyDto)
+2019-10-17 10:22:55,381 TRACE o.s.w.s.h.AbstractHandlerMethodMapping [main] 
+	c.e.r.c.CourtController:
+	{POST /court/add}: add(CourtDto)
+2019-10-17 10:22:55,388 TRACE o.s.w.s.h.AbstractHandlerMethodMapping [main] 
+	c.e.r.c.GovernmentAuthoritiesOppositeSideController:
+	{POST /gaos/add}: add(GovernmentAuthoritiesOppositeSideDto)
+2019-10-17 10:22:55,390 TRACE o.s.w.s.h.AbstractHandlerMethodMapping [main] 
+	c.e.r.c.JudgeController:
+	{POST /judge/add}: add(JudgeDto)
+2019-10-17 10:22:55,391 TRACE o.s.w.s.h.AbstractHandlerMethodMapping [main] 
+	c.e.r.c.LoggedUser:
+	{GET /user}: user(Principal)
+2019-10-17 10:22:55,393 TRACE o.s.w.s.h.AbstractHandlerMethodMapping [main] 
+	c.e.r.c.OppositeSideAdvocateController:
+	{POST /osa/add}: add(OppositeSideAdvocateDto)
+2019-10-17 10:22:55,398 TRACE o.s.w.s.h.AbstractHandlerMethodMapping [main] 
+	c.e.r.c.OppositeSideCompanyController:
+	{POST /osc/add}: add(OppositeSideCompanyDto)
+2019-10-17 10:22:55,400 TRACE o.s.w.s.h.AbstractHandlerMethodMapping [main] 
+	c.e.r.c.OppositeSidePersonController:
+	{POST /osp/add}: add(OppositeSidePersonDto)
+2019-10-17 10:22:55,404 TRACE o.s.w.s.h.AbstractHandlerMethodMapping [main] 
+	c.e.r.c.UserController:
+	{GET /user/page}: listUser(Integer,Integer,String,String)
+	{POST /user/activate}: activateUser(String)
+	{GET /user/admins/page}: listAdmins(Integer,Integer,String,String)
+	{POST /user/}: getUser(String)
+	{POST /user/edit}: editUser(CUserDto)
+	{POST /user/deactivate}: deactivateUser(String)
+2019-10-17 10:22:55,410 TRACE o.s.w.s.h.AbstractHandlerMethodMapping [main] 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ /error}: error(HttpServletRequest)
+	{ /error, produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2019-10-17 10:22:55,421 DEBUG o.s.w.s.h.AbstractHandlerMethodMapping [main] 30 mappings in 'requestMappingHandlerMapping'
+2019-10-17 10:22:55,568 INFO o.s.b.a.w.s.WelcomePageHandlerMapping [main] Adding welcome page: class path resource [META-INF/resources/index.html]
+2019-10-17 10:22:56,506 INFO o.s.b.a.e.w.EndpointLinksResolver [main] Exposing 15 endpoint(s) beneath base path '/actuator'
+2019-10-17 10:22:56,673 INFO o.s.b.StartupInfoLogger [main] Started ELawyerApplicationTests in 9.695 seconds (JVM running for 10.776)
+2019-10-17 10:22:56,814 INFO o.s.s.c.ExecutorConfigurationSupport [Thread-5] Shutting down ExecutorService 'applicationTaskExecutor'
+2019-10-17 10:22:56,823 INFO o.s.o.j.AbstractEntityManagerFactoryBean [Thread-5] Closing JPA EntityManagerFactory for persistence unit 'default'
+2019-10-17 10:22:56,827 INFO c.z.h.HikariDataSource [Thread-5] HikariPool-1 - Shutdown initiated...
+2019-10-17 10:22:56,839 INFO c.z.h.HikariDataSource [Thread-5] HikariPool-1 - Shutdown completed.

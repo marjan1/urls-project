@@ -23,29 +23,12 @@ export class AuthGuard implements CanActivate, CanActivateChild {
               state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     console.log("Guard can activateMethod");
     let user = this.authService.getLoggedUser();
+
     //  let decodedToken = this.tokenStorage.getDecodedToken();
     let accessDenied: string = 'page-not-found';
     if (user) {
       console.log('decoded token 1');
-      if (route.component === PortalAdminComponent &&
-        user.roleDtos.find(value => value.name === 'ROLE_PORTAL_ADMINISTRATOR')) {
-        console.log('decoded token 2');
-        return true;
-      } else if (route.component === CompanyAdminComponent &&
-        user.roleDtos.find(value => value.name === 'ROLE_ADVOCATE_COMPANY_ADMINISTRATOR')) {
-        console.log('decoded token 3');
-        return true;
-      } else if (route.component === AdvocateComponent &&
-        user.roleDtos.find(value => value.name === 'ROLE_ADVOCATE')) {
-        return true;
-      } else if (route.component === ApprenticeComponent &&
-        user.roleDtos.find(value => value.name === 'ROLE_APPRENTICE')) {
-        return true;
-      } else {
-        console.log('decoded token Access Denied');
-        this.router.navigate([accessDenied]);
-      }
-
+      return true;
     } else {
       console.log('user not logged in');
      this.authService.logout();

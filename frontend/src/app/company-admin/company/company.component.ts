@@ -10,6 +10,7 @@ import {AuthService} from "../../_service/auth.service";
 import {UserService} from "../../_service/user.service";
 import {LoggedUser} from "../../_model/logged-user.model";
 import {User} from "../../_model/user.model";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-company',
@@ -28,7 +29,8 @@ export class CompanyComponent implements OnInit {
               private companyService: CompanyService,
               private userService: UserService,
               private snackBar: MatSnackBar,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private _route: ActivatedRoute) {
 
 
   }
@@ -37,6 +39,8 @@ export class CompanyComponent implements OnInit {
 
     console.log('Rolesss =  ', this.appService.getRoles1());
     console.log('StST = ', this.appService.getStauses1());
+
+    this.user = this._route.snapshot.data.pageData;
 
     this.statuses = this.appService.getStauses1();
 

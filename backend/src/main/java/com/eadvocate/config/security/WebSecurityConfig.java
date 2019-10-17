@@ -30,6 +30,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private  BCryptPasswordEncoder bCryptPasswordEncoder;
+
     /**
      * Creation of AuthenticationManager in order to be able to be used as dependency in
      * the project.
@@ -52,7 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication().withUser("mar@d.com").password("jan").roles("ADVOCATE_COMPANY_ADMINISTRATOR");
         auth.userDetailsService(userServiceImpl)
-                .passwordEncoder(encoder());
+                .passwordEncoder(bCryptPasswordEncoder);
     }
 
     /**
@@ -81,15 +84,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().disable();
     }
 
-    /**
-     * Creation of BCryptPasswordEncoder bean in order to be used as dependency
-     * in the project.
-     * @return BCryptPasswordEncoder
-     */
-    @Bean
-    public BCryptPasswordEncoder encoder() {
-        return new BCryptPasswordEncoder();
-    }
+//    /**
+//     * Creation of BCryptPasswordEncoder bean in order to be used as dependency
+//     * in the project.
+//     * @return BCryptPasswordEncoder
+//     */
+//    @Bean
+//    public BCryptPasswordEncoder encoder() {
+//        return new BCryptPasswordEncoder();
+//    }
 
 //    public static void main(String[] args) {
 //        BCryptPasswordEncoder bCryptPasswordEncoder =  new BCryptPasswordEncoder();

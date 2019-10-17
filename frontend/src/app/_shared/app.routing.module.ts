@@ -15,6 +15,7 @@ import {AdminsComponent} from "../portal-admin/admins/admins.component";
 import {CompanyComponent} from "../company-admin/company/company.component";
 import {CasesComponent} from "../company-admin/cases/cases.component";
 import {CompanyUsersComponent} from "../company-admin/company-users/company-users.component";
+import {CompanyResolver} from "../company-admin/company/company.resolver.";
 
 const routes: Routes = [
   {path: '', redirectTo: '/', pathMatch: 'full'},
@@ -34,7 +35,7 @@ const routes: Routes = [
     component: CompanyAdminComponent,
     children: [
       {path: '', component: CasesComponent},
-      {path: 'company', component: CompanyComponent},
+      {path: 'company', component: CompanyComponent, resolve: {pageData: CompanyResolver}},
       {path: 'users', component: CompanyUsersComponent}
     ]
   },
