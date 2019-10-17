@@ -1,121 +1,45 @@
-2019-10-17 16:16:57,977 INFO o.s.b.StartupInfoLogger [restartedMain] Starting ELawyerApplication on DESKTOP-M4N1T0F with PID 13496 (C:\Users\marja\IdeaProjects\e-advocates-project\backend\target\classes started by marja in C:\Users\marja\IdeaProjects\e-advocates-project)
-2019-10-17 16:16:57,985 DEBUG o.s.b.StartupInfoLogger [restartedMain] Running with Spring Boot v2.1.2.RELEASE, Spring v5.1.4.RELEASE
-2019-10-17 16:16:57,986 INFO o.s.b.SpringApplication [restartedMain] The following profiles are active: prod
-2019-10-17 16:16:58,047 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2019-10-17 16:16:58,049 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2019-10-17 16:16:59,428 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data repositories in DEFAULT mode.
-2019-10-17 16:16:59,594 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 160ms. Found 16 repository interfaces.
-2019-10-17 16:17:00,287 INFO o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$ed5d23b9] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2019-10-17 16:17:00,426 INFO o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration$$EnhancerBySpringCGLIB$$860aebf3] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2019-10-17 16:17:00,434 INFO o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2019-10-17 16:17:00,436 INFO o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@89ad7e1' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2019-10-17 16:17:00,437 INFO o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'methodSecurityConfigurer' of type [com.eadvocate.config.security.MethodSecurityConfigurer$$EnhancerBySpringCGLIB$$a971f718] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2019-10-17 16:17:00,451 INFO o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'org.springframework.security.config.annotation.method.configuration.Jsr250MetadataSourceConfiguration' of type [org.springframework.security.config.annotation.method.configuration.Jsr250MetadataSourceConfiguration$$EnhancerBySpringCGLIB$$d034a6bb] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2019-10-17 16:17:00,455 INFO o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'jsr250MethodSecurityMetadataSource' of type [org.springframework.security.access.annotation.Jsr250MethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2019-10-17 16:17:00,458 INFO o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2019-10-17 16:17:01,200 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
-2019-10-17 16:17:01,219 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
-2019-10-17 16:17:01,230 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
-2019-10-17 16:17:01,231 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.14]
-2019-10-17 16:17:01,246 INFO o.a.j.l.DirectJDKLog [restartedMain] The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_191\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Python27\;C:\Python27\Scripts;C:\ProgramData\Boxstarter;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\Git\bin;C:\Program Files\Java\jdk1.8.0_191\bin;C:\Program Files\Apache\Maven\apache-maven-3.5.4\bin;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files (x86)\Yarn\bin\;C:\Gradle\gradle-5.5.1\bin;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;%SYSTEMROOT%\System32\OpenSSH\;C:\Users\marja\AppData\Local\Microsoft\WindowsApps;C:\Users\marja\AppData\Roaming\npm;C:\Program Files\heroku\bin;C:\Users\marja\AppData\Local\Yarn\bin;%USERPROFILE%\AppData\Local\Microsoft\WindowsApps;;.]
-2019-10-17 16:17:01,391 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
-2019-10-17 16:17:01,392 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 3343 ms
-2019-10-17 16:17:02,135 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Starting...
-2019-10-17 16:17:02,628 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
-2019-10-17 16:17:02,697 INFO o.h.j.i.u.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [
+2019-10-17 17:45:08,393 INFO o.s.b.StartupInfoLogger [restartedMain] Starting Application on DESKTOP-M4N1T0F with PID 14728 (C:\Users\marja\IdeaProjects\e-advocates-project\backend\target\classes started by marja in C:\Users\marja\IdeaProjects\e-advocates-project)
+2019-10-17 17:45:08,403 DEBUG o.s.b.StartupInfoLogger [restartedMain] Running with Spring Boot v2.1.2.RELEASE, Spring v5.1.4.RELEASE
+2019-10-17 17:45:08,403 INFO o.s.b.SpringApplication [restartedMain] The following profiles are active: prod
+2019-10-17 17:45:08,463 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-10-17 17:45:08,464 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-10-17 17:45:09,737 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-10-17 17:45:09,843 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 98ms. Found 4 repository interfaces.
+2019-10-17 17:45:10,394 INFO o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$7e7e535b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-10-17 17:45:11,119 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
+2019-10-17 17:45:11,138 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2019-10-17 17:45:11,150 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2019-10-17 17:45:11,151 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-10-17 17:45:11,165 INFO o.a.j.l.DirectJDKLog [restartedMain] The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_191\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Python27\;C:\Python27\Scripts;C:\ProgramData\Boxstarter;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\Git\bin;C:\Program Files\Java\jdk1.8.0_191\bin;C:\Program Files\Apache\Maven\apache-maven-3.5.4\bin;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files (x86)\Yarn\bin\;C:\Gradle\gradle-5.5.1\bin;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;%SYSTEMROOT%\System32\OpenSSH\;C:\Users\marja\AppData\Local\Microsoft\WindowsApps;C:\Users\marja\AppData\Roaming\npm;C:\Program Files\heroku\bin;C:\Users\marja\AppData\Local\Yarn\bin;%USERPROFILE%\AppData\Local\Microsoft\WindowsApps;;.]
+2019-10-17 17:45:11,295 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2019-10-17 17:45:11,295 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 2830 ms
+2019-10-17 17:45:11,885 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Starting...
+2019-10-17 17:45:12,427 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
+2019-10-17 17:45:12,490 INFO o.h.j.i.u.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [
 	name: default
 	...]
-2019-10-17 16:17:02,775 INFO o.h.Version [restartedMain] HHH000412: Hibernate Core {5.3.7.Final}
-2019-10-17 16:17:02,778 INFO o.h.c.Environment [restartedMain] HHH000206: hibernate.properties not found
-2019-10-17 16:17:02,950 INFO o.h.a.c.r.j.JavaReflectionManager [restartedMain] HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
-2019-10-17 16:17:03,141 INFO o.h.d.Dialect [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
-2019-10-17 16:17:05,175 INFO o.s.o.j.AbstractEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
-2019-10-17 16:17:05,199 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
-2019-10-17 16:17:05,785 INFO o.h.h.i.QueryTranslatorFactoryInitiator [restartedMain] HHH000397: Using ASTQueryTranslatorFactory
-2019-10-17 16:17:06,602 INFO o.s.s.w.DefaultSecurityFilterChain [restartedMain] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@19fdb4e6, org.springframework.security.web.context.SecurityContextPersistenceFilter@2b77666c, org.springframework.security.web.header.HeaderWriterFilter@3a29e7da, org.springframework.web.filter.CorsFilter@3fdfe743, org.springframework.security.web.authentication.logout.LogoutFilter@24947b6e, com.eadvocate.config.security.JWTAuthenticationFilter@28bdc5f6, com.eadvocate.config.security.JWTAuthorizationFilter@629961bd, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@28502334, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@33558df1, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1637b38c, org.springframework.security.web.session.SessionManagementFilter@5cb5a6be, org.springframework.security.web.access.ExceptionTranslationFilter@31f1f7f, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5e3b88c]
-2019-10-17 16:17:06,794 INFO o.s.s.c.ExecutorConfigurationSupport [restartedMain] Initializing ExecutorService 'applicationTaskExecutor'
-2019-10-17 16:17:06,858 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration [restartedMain] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2019-10-17 16:17:06,891 TRACE o.s.w.s.h.AbstractHandlerMethodMapping [restartedMain] 
-	c.e.r.c.AdvocateCompanyController:
-	{GET /advocatecompany/page}: listUser(Integer,Integer,String,String)
-	{POST /advocatecompany/activate}: activateAdvocateCompany(AdvocateCompanyDto)
-	{POST /advocatecompany/deactivate}: deactivateAdvocateCompany(AdvocateCompanyDto)
-	{POST /advocatecompany/add}: addAdvocateCompany(AdvocateCompanyDto)
-	{POST /advocatecompany/addwithadmin}: addAdvocateCompanyWithAdmin(CompanyUserDto)
-2019-10-17 16:17:06,899 TRACE o.s.w.s.h.AbstractHandlerMethodMapping [restartedMain] 
-	c.e.r.c.AppController:
-	{GET /app/statuses}: getAllStatuses()
-	{GET /app/us}: getAllStatuses1()
-	{POST /app/add}: addNewUser(UserDto)
-	{GET /app/roles}: getAllRoles()
-	{POST /app/emailcheck}: checkEmailExistence(String)
-2019-10-17 16:17:06,901 TRACE o.s.w.s.h.AbstractHandlerMethodMapping [restartedMain] 
-	c.e.r.c.AuthenticationController:
+2019-10-17 17:45:12,574 INFO o.h.Version [restartedMain] HHH000412: Hibernate Core {5.3.7.Final}
+2019-10-17 17:45:12,574 INFO o.h.c.Environment [restartedMain] HHH000206: hibernate.properties not found
+2019-10-17 17:45:12,760 INFO o.h.a.c.r.j.JavaReflectionManager [restartedMain] HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2019-10-17 17:45:12,941 INFO o.h.d.Dialect [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2019-10-17 17:45:14,258 INFO o.s.o.j.AbstractEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-10-17 17:45:14,282 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2019-10-17 17:45:15,164 INFO o.s.s.w.DefaultSecurityFilterChain [restartedMain] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1d16e1e5, org.springframework.security.web.context.SecurityContextPersistenceFilter@2e7bcef3, org.springframework.security.web.header.HeaderWriterFilter@25454dba, org.springframework.web.filter.CorsFilter@47f2266f, org.springframework.security.web.authentication.logout.LogoutFilter@7cc26c5f, com.url.config.security.JWTAuthenticationFilter@4f4ef58c, com.url.config.security.JWTAuthorizationFilter@578a28e6, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@112b828a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@73bf5ae2, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7db9e23b, org.springframework.security.web.session.SessionManagementFilter@73cad500, org.springframework.security.web.access.ExceptionTranslationFilter@61e42166, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@36dae871]
+2019-10-17 17:45:15,305 INFO o.s.s.c.ExecutorConfigurationSupport [restartedMain] Initializing ExecutorService 'applicationTaskExecutor'
+2019-10-17 17:45:15,375 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration [restartedMain] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-10-17 17:45:15,416 TRACE o.s.w.s.h.AbstractHandlerMethodMapping [restartedMain] 
+	c.u.r.c.AuthenticationController:
 	{POST /signup}: signupNewUser(UserDto)
-2019-10-17 16:17:06,903 TRACE o.s.w.s.h.AbstractHandlerMethodMapping [restartedMain] 
-	c.e.r.c.ClientCompanyController:
-	{POST /clientcompany/add}: addClientPerson(ClientCompanyDto)
-	{POST /clientcompany/page}: getPageWithClientCompaniesForCompany(Integer,Integer,AdvocateCompanyDto)
-2019-10-17 16:17:06,905 TRACE o.s.w.s.h.AbstractHandlerMethodMapping [restartedMain] 
-	c.e.r.c.ClientPersonController:
-	{POST /clientperson/add}: addClientPerson(ClientPersonDto)
-	{POST /clientperson/page}: getPageWithClientPersonsForCompany(Integer,Integer,AdvocateCompanyDto)
-2019-10-17 16:17:06,906 TRACE o.s.w.s.h.AbstractHandlerMethodMapping [restartedMain] 
-	c.e.r.c.CourtController:
-	{POST /court/add}: add(CourtDto)
-2019-10-17 16:17:06,911 TRACE o.s.w.s.h.AbstractHandlerMethodMapping [restartedMain] 
-	c.e.r.c.GovernmentAuthoritiesOppositeSideController:
-	{POST /gaos/add}: add(GovernmentAuthoritiesOppositeSideDto)
-2019-10-17 16:17:06,912 TRACE o.s.w.s.h.AbstractHandlerMethodMapping [restartedMain] 
-	c.e.r.c.JudgeController:
-	{POST /judge/add}: add(JudgeDto)
-2019-10-17 16:17:06,912 TRACE o.s.w.s.h.AbstractHandlerMethodMapping [restartedMain] 
-	c.e.r.c.LinkController:
+2019-10-17 17:45:15,416 TRACE o.s.w.s.h.AbstractHandlerMethodMapping [restartedMain] 
+	c.u.r.c.LinkController:
 	{POST /link/add}: add(AddLinkDto)
-2019-10-17 16:17:06,913 TRACE o.s.w.s.h.AbstractHandlerMethodMapping [restartedMain] 
-	c.e.r.c.LoggedUser:
-	{GET /user}: user(Principal)
-2019-10-17 16:17:06,916 TRACE o.s.w.s.h.AbstractHandlerMethodMapping [restartedMain] 
-	c.e.r.c.OppositeSideAdvocateController:
-	{POST /osa/add}: add(OppositeSideAdvocateDto)
-2019-10-17 16:17:06,918 TRACE o.s.w.s.h.AbstractHandlerMethodMapping [restartedMain] 
-	c.e.r.c.OppositeSideCompanyController:
-	{POST /osc/add}: add(OppositeSideCompanyDto)
-2019-10-17 16:17:06,919 TRACE o.s.w.s.h.AbstractHandlerMethodMapping [restartedMain] 
-	c.e.r.c.OppositeSidePersonController:
-	{POST /osp/add}: add(OppositeSidePersonDto)
-2019-10-17 16:17:06,921 TRACE o.s.w.s.h.AbstractHandlerMethodMapping [restartedMain] 
-	c.e.r.c.UserController:
-	{POST /user/activate}: activateUser(String)
-	{POST /user/deactivate}: deactivateUser(String)
-	{GET /user/page}: listUser(Integer,Integer,String,String)
-	{POST /user/}: getUser(String)
-	{GET /user/admins/page}: listAdmins(Integer,Integer,String,String)
-	{POST /user/edit}: editUser(CUserDto)
-2019-10-17 16:17:06,926 TRACE o.s.w.s.h.AbstractHandlerMethodMapping [restartedMain] 
+2019-10-17 17:45:15,426 TRACE o.s.w.s.h.AbstractHandlerMethodMapping [restartedMain] 
 	o.s.b.a.w.s.e.BasicErrorController:
 	{ /error}: error(HttpServletRequest)
 	{ /error, produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2019-10-17 16:17:06,933 DEBUG o.s.w.s.h.AbstractHandlerMethodMapping [restartedMain] 31 mappings in 'requestMappingHandlerMapping'
-2019-10-17 16:17:07,002 INFO o.s.b.a.w.s.WelcomePageHandlerMapping [restartedMain] Adding welcome page: class path resource [META-INF/resources/index.html]
-2019-10-17 16:17:07,332 INFO o.s.b.a.e.w.EndpointLinksResolver [restartedMain] Exposing 15 endpoint(s) beneath base path '/actuator'
-2019-10-17 16:17:07,484 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
-2019-10-17 16:17:07,513 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port(s): 8080 (http) with context path ''
-2019-10-17 16:17:07,515 INFO o.s.b.StartupInfoLogger [restartedMain] Started ELawyerApplication in 10.177 seconds (JVM running for 11.297)
-2019-10-17 16:17:29,221 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
-2019-10-17 16:17:29,221 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
-2019-10-17 16:17:29,232 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 11 ms
-2019-10-17 16:17:29,447 INFO c.e.s.i.UserServiceImpl [http-nio-8080-exec-1] Load user by username = ma1q22rr@co.cv
-2019-10-17 16:17:29,532 TRACE o.s.w.s.h.AbstractHandlerMapping [http-nio-8080-exec-1] Mapped to public com.eadvocate.rest.dto.LinkDto com.eadvocate.rest.controller.LinkController.add(com.eadvocate.rest.dto.AddLinkDto)
-2019-10-17 16:17:29,617 INFO c.e.r.c.LinkController [http-nio-8080-exec-1] Request for adding new link with text https://dzone.com/articles/what-are-the-basic-data-types-in-typescript
-2019-10-17 16:17:33,213 INFO c.e.s.LinkService [http-nio-8080-exec-1] Adding new link with name https://dzone.com/articles/what-are-the-basic-data-types-in-typescript
-2019-10-17 16:57:52,488 DEBUG o.s.s.w.a.AbstractAuthenticationProcessingFilter [http-nio-8080-exec-4] Request is to process authentication
-2019-10-17 16:57:52,740 INFO c.e.s.i.UserServiceImpl [http-nio-8080-exec-4] Load user by username = ma1q22rr@co.cv
-2019-10-17 16:57:52,822 INFO c.e.s.i.UserServiceImpl [http-nio-8080-exec-4] Get user by username = ma1q22rr@co.cv
-2019-10-17 16:59:38,459 DEBUG o.s.s.w.a.AbstractAuthenticationProcessingFilter [http-nio-8080-exec-6] Request is to process authentication
-2019-10-17 16:59:38,541 INFO c.e.s.i.UserServiceImpl [http-nio-8080-exec-6] Load user by username = ma1q22rr@co.cv
-2019-10-17 16:59:38,623 INFO c.e.s.i.UserServiceImpl [http-nio-8080-exec-6] Get user by username = ma1q22rr@co.cv
-2019-10-17 17:06:04,679 INFO c.e.s.i.UserServiceImpl [http-nio-8080-exec-9] Load user by username = ma1q22rr@co.cv
-2019-10-17 17:06:04,687 TRACE o.s.w.s.h.AbstractHandlerMapping [http-nio-8080-exec-9] Mapped to public com.eadvocate.rest.dto.LinkDto com.eadvocate.rest.controller.LinkController.add(com.eadvocate.rest.dto.AddLinkDto)
-2019-10-17 17:06:04,690 INFO c.e.r.c.LinkController [http-nio-8080-exec-9] Request for adding new link with text https://www.google.com/search?q=java+8+pagse+url&oq=java+8+pagse+url+&aqs=chrome..69i57j0l2.7839j0j7&sourceid=chrome&ie=UTF-8
-2019-10-17 17:06:12,896 INFO c.e.s.LinkService [http-nio-8080-exec-9] Adding new link with name https://www.google.com/search?q=java+8+pagse+url&oq=java+8+pagse+url+&aqs=chrome..69i57j0l2.7839j0j7&sourceid=chrome&ie=UTF-8
+2019-10-17 17:45:15,426 DEBUG o.s.w.s.h.AbstractHandlerMethodMapping [restartedMain] 4 mappings in 'requestMappingHandlerMapping'
+2019-10-17 17:45:15,476 INFO o.s.b.a.w.s.WelcomePageHandlerMapping [restartedMain] Adding welcome page: class path resource [META-INF/resources/index.html]
+2019-10-17 17:45:15,756 INFO o.s.b.a.e.w.EndpointLinksResolver [restartedMain] Exposing 15 endpoint(s) beneath base path '/actuator'
+2019-10-17 17:45:15,869 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2019-10-17 17:45:15,907 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port(s): 8080 (http) with context path ''
+2019-10-17 17:45:15,909 INFO o.s.b.StartupInfoLogger [restartedMain] Started Application in 8.198 seconds (JVM running for 9.189)

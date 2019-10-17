@@ -13,12 +13,11 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CustomMaterialModule} from "./_shared/material.module";
 import {AppRoutingModule} from "./_shared/app.routing.module";
-import {InitComponent} from './portal-admin/init.component';
+import {InitComponent} from './init/init.component';
 import {HeaderComponent} from './header/header.component';
 import {AppService} from "./_service/app.service";
 import {SignupComponent} from "./auth/signup/signup.component";
-import {NewLinkComponent} from './portal-admin/new-link/new-link.component';
-import {CompaniesComponent} from './portal-admin/companies/companies.component';
+import {NewLinkComponent} from './init/new-link/new-link.component';
 
 
 export function appInitFactory(provider: AppService) {
@@ -34,7 +33,7 @@ export function appInitFactory(provider: AppService) {
     HeaderComponent,
     SignupComponent,
     NewLinkComponent,
-    CompaniesComponent,
+
   ],
   imports: [
     BrowserModule,

@@ -9,13 +9,13 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.eadvocate</groupId>
-    <artifactId>e-lawyer-backend</artifactId>
+    <groupId>com.url</groupId>
+    <artifactId>backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>e-lawyer</name>
-    <description>Project for advocates</description>
+    <name>backend</name>
+    <description>Backend part</description>
 
 
     <properties>
@@ -29,7 +29,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.eadvocate</groupId>
+            <groupId>com.url</groupId>
             <artifactId>frontend</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>

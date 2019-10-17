@@ -12,13 +12,13 @@
 
 
 
-    <groupId>com.eadvocate</groupId>
-    <artifactId>e-lawyer</artifactId>
+    <groupId>com.url</groupId>
+    <artifactId>test-project</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>e-lawyer</name>
-    <description>Backend project as part of E-Advocate project for lawyers and law companies</description>
+    <name>Symphony</name>
+    <description> project</description>
 
     <modules>
         <module>backend</module>

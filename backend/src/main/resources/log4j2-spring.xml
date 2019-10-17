@@ -38,7 +38,7 @@
         </Root>
 
         <!-- LOG "com.baeldung*" at TRACE level -->
-        <Logger name="com.eadvocate" level="trace"></Logger>
+        <Logger name="com.url" level="trace"></Logger>
     </Loggers>
 
 </Configuration>

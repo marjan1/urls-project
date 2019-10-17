@@ -800,24 +800,12 @@ MIT
 
 @angular/material/toolbar
 
-@angular/material/core
-
 @angular/material/card
 
 @angular/forms
 MIT
 
 @angular/material/form-field
-
-@angular/material/select
-
-@angular/material/progress-spinner
-
-@angular/material/sort
-
-@angular/material/table
-
-@angular/material/paginator
 
 @angular/material/icon
 
