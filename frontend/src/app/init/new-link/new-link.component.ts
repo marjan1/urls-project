@@ -24,11 +24,11 @@ export class NewLinkComponent implements OnInit {
   suggestioTags: string[];
   showAdminForm: boolean;
 
-  message: string = 'Snack Bar opened.';
-  actionButtonLabel: string = 'Retry';
+  message: string = 'Link added successfully';
+  actionButtonLabel: string = 'Close';
   action: boolean = true;
   setAutoHide: boolean = true;
-  autoHide: number = 2000;
+  autoHide: number = 7000;
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
 
   constructor(private appService: AppService,
@@ -54,29 +54,31 @@ export class NewLinkComponent implements OnInit {
     this.addLink = new AddLink();
     this.addLink.link = this.newCompanyForm.get('url').value;
     this.addLink.tags = this.newCompanyForm.get('tags').value.split(" ");
+    let config = new MatSnackBarConfig();
 
-    this.linkService.addNewLink(this.addLink).subscribe(
-      (link: Link) => {
-        this.links.push(link);
-        let config = new MatSnackBarConfig();
-
-        config.horizontalPosition = this.horizontalPosition;
-        config.duration = this.setAutoHide ? this.autoHide : 0;
-
-        this.snackBar.open(this.message, this.action ? this.actionButtonLabel : undefined, config);
-      }
-    )
+    if (this.addLink.link && this.addLink.link.length > 0
+      &&  this.newCompanyForm.get('tags').value && this.newCompanyForm.get('tags').value.length > 0) {
+      this.linkService.addNewLink(this.addLink).subscribe(
+        (link: Link) => {
+          this.links.push(link);
+          config.horizontalPosition = this.horizontalPosition;
+          config.duration = this.setAutoHide ? this.autoHide : 0;
+          this.snackBar.open(this.message, this.action ? this.actionButtonLabel : undefined, config);
+        }
+      )
+    }else{
+      this.snackBar.open("Fields should not be empty ", this.action ? this.actionButtonLabel : undefined, config);
+    }
   }
 
-  getSuggestions(){
+  getSuggestions() {
     console.log("Eve ima  blur");
     this.linkService.getSuggestionsForLink(this.newCompanyForm.get('url').value).subscribe(
-      (value:any)=>{
+      (value: any) => {
         this.suggestioTags = value;
       }
     )
   }
-
 
 
 }
