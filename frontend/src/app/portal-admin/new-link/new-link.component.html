@@ -1,0 +1,30 @@
+
+<mat-toolbar class="toolbar-custom">
+  <span>Add Link</span>
+</mat-toolbar>
+<mat-card class="example-card">
+  <mat-card-content>
+    <form class="my-form" [formGroup]="newCompanyForm">
+
+      <mat-form-field class="full-width">
+        <mat-label>Link</mat-label>
+        <input matInput placeholder="Link"
+               formControlName="url">
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label> Add tags separated by space  </mat-label>
+        <input matInput  placeholder="Tags"
+               formControlName="tags">
+      </mat-form-field>
+
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button type="submit" (click)="addNewLinkSubmit()" color="primary">Add</button>
+  </mat-card-actions>
+</mat-card>
+
+
+
+

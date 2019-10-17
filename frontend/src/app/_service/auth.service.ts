@@ -6,7 +6,7 @@ import {TokenStorage} from "../_shared/token.storage";
 import {CurrentUser} from "../_model/current-user.model";
 import "rxjs-compat/add/operator/publishReplay";
 import {User} from "../_model/user.model";
-import {UserService} from "./user.service";
+import {LinkService} from "./link.service";
 import {Router} from "@angular/router";
 
 @Injectable()
@@ -26,7 +26,7 @@ export class AuthService {
 
   constructor(private http: HttpClient,
               private tokenStorage: TokenStorage,
-              private userService: UserService,
+              private userService: LinkService,
               private router: Router) {
     // this.isLoggedUserSubject = new BehaviorSubject<LoggedUser>(tokenStorage.getDecodedToken());
     // this.currentUser = this.isLoggedUserSubject.asObservable();

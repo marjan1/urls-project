@@ -32,7 +32,7 @@ export class LoginComponent {
          this.token.saveToken(data['bearerToken']);
    //     let  loggedUser : LoggedUser  = this.token.decodedToken;
 
- this.router.navigate(['portal-admin']);
+ this.router.navigate(['init']);
 
       }
     );

@@ -1,11 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AppService} from "../../_service/app.service";
-import {Status} from "../../_model/status.model";
-import {Role} from "../../_model/role.model";
 import {ConfirmPasswordValidator} from "../../_shared/validator/confirm-password.validator";
 import {Observable} from "rxjs";
-import {UserService} from "../../_service/user.service";
+import {LinkService} from "../../_service/link.service";
 import {User} from "../../_model/user.model";
 import {MatSnackBar} from "@angular/material";
 
@@ -18,26 +16,15 @@ export class SignupComponent implements OnInit {
 
   hide = true;
   signupForm: FormGroup;
-  statuses: Status[];
-  roles: Role[];
+
 
   constructor(private appService: AppService,
-              private userService: UserService,
+              private userService: LinkService,
               private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
-    this.appService.getStatuses().subscribe(
-      (data: Status[]) => {
-        this.statuses = data;
-      }
-    );
 
-    this.appService.getRoles().subscribe(
-      (data: Role[]) => {
-        this.roles = data;
-      }
-    );
 
     this.signupForm = new FormGroup({
       'firstname': new FormControl('', Validators.required),

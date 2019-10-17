@@ -1,7 +1,3 @@
-import {Role} from "./role.model";
-import {Status} from "./status.model";
-import {AdvocateCompany} from "./advocate-company.model";
-
 export class User {
 
   id: number;
@@ -13,7 +9,7 @@ export class User {
   matchingPassword: string;
   phone: string;
 
-  advocateCompany: AdvocateCompany;
+
   accountGroupLevel: number;
 
 }
