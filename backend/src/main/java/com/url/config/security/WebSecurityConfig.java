@@ -84,22 +84,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().disable();
     }
 
-//    /**
-//     * Creation of BCryptPasswordEncoder bean in order to be used as dependency
-//     * in the project.
-//     * @return BCryptPasswordEncoder
-//     */
-//    @Bean
-//    public BCryptPasswordEncoder encoder() {
-//        return new BCryptPasswordEncoder();
-//    }
-
-//    public static void main(String[] args) {
-//        BCryptPasswordEncoder bCryptPasswordEncoder =  new BCryptPasswordEncoder();
-//
-//       String encoded =  bCryptPasswordEncoder.encode("1");
-//        System.out.println("encoded "+encoded);
-//    }
-
 
 }

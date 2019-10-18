@@ -1,6 +1,7 @@
 package com.url.service;
 
 
+import com.url.persistence.model.User;
 import com.url.rest.dto.UserDto;
 
 public interface UserService {
@@ -11,7 +12,7 @@ public interface UserService {
 
     boolean checkEmailExistence(String email);
 
-    boolean checkEmailExistenceForUser(Long id, String email);
+   User getLoggedUser();
 
 
     UserDto findOne(String username);

@@ -7,9 +7,12 @@ import com.url.rest.dto.UserDto;
 import com.url.service.UserService;
 import com.url.util.ConversionUtil;
 import com.url.validation.exception.EmailExistsException;
+import com.url.validation.exception.UserNotLoggedException;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -18,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -37,16 +41,10 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         log.info("Load user by username = {}", username);
-        User user = getUserByEmail(username);
+        User user = getUserByEmailOrUsername(username);
 
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), getAuthority(user));
     }
-
-
-
-
-
-
 
 
     @Override
@@ -57,10 +55,13 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
 
     @Override
-    public boolean checkEmailExistenceForUser(Long id, String email) {
-        log.info("Check existence of email {}", email);
-        return userRepository.findByEmailAndIdNot(email,id).isPresent();
+    public User getLoggedUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+        return this.userRepository.findByEmail(currentPrincipalName)
+                .orElseThrow(() -> new UserNotLoggedException());
     }
+
 
     @Override
     public UserDto findOne(String username) throws UsernameNotFoundException {
@@ -84,7 +85,6 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
 
 
-
     private UserDto saveOrUpdateUser(UserDto userDto) {
         User user = conversionUtil.convertObjectTo(userDto, User.class);
         User save1 = this.userRepository.save(user);
@@ -98,8 +98,16 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         return authorities;
     }
 
-    private User getUserByEmail(String email) {
-        return userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("Invalid username or password."));
+    private User getUserByEmailOrUsername(String email) {
+        Optional<User> user = userRepository.findByEmail(email);
+        if (!user.isPresent()) {
+            user = this.userRepository.findByUsername(email);
+        }
+        if (user.isPresent()) {
+            return user.get();
+        }
+
+        throw new UsernameNotFoundException("Invalid username or password.");
     }
 
 }
