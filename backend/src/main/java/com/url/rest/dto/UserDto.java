@@ -42,7 +42,7 @@ public class UserDto {
     @Size(min = 1, message = "{Size.userDto.email}")
     private String email;
 
-    private String phone;
+    private String username;
 
 
 

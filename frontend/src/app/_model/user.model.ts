@@ -7,7 +7,7 @@ export class User {
   address: string;
   password: string;
   matchingPassword: string;
-  phone: string;
+  username: string;
 
 
 }
