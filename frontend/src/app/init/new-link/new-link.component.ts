@@ -72,7 +72,7 @@ export class NewLinkComponent implements OnInit {
   }
 
   getSuggestions() {
-    console.log("Eve ima  blur");
+
     this.linkService.getSuggestionsForLink(this.newCompanyForm.get('url').value).subscribe(
       (value: any) => {
         this.suggestioTags = value;
